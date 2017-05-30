@@ -1,15 +1,15 @@
 package complate;
 
 import javax.script.ScriptEngineManager;
-import javax.script.ScriptEngine;
-import javax.script.Invocable;
 import javax.script.ScriptException;
+import jdk.nashorn.api.scripting.NashornScriptEngine;
 import jdk.nashorn.api.scripting.NashornException;
 import java.io.FileReader;
 import java.io.FileNotFoundException;
 
 public class ScriptingBridge {
-    private final ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
+    private final NashornScriptEngine engine = (NashornScriptEngine) new ScriptEngineManager().
+        getEngineByName("nashorn");
 
     public void invoke(String filepath, String functionName, Object... args)
             throws ScriptingException {
@@ -19,10 +19,8 @@ public class ScriptingBridge {
             throw ScriptingException.create("failed to evaluate script",
                     filepath, functionName, err, extractJavaScriptError(err));
         }
-        Invocable invocable = (Invocable) engine;
-
         try {
-            invocable.invokeFunction(functionName, args);
+            engine.invokeFunction(functionName, args);
         } catch(ScriptException | NoSuchMethodException err) {
             throw ScriptingException.create("failed to invoke function",
                     filepath, functionName, err, extractJavaScriptError(err));
