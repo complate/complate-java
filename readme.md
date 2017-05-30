@@ -1,6 +1,6 @@
 
 ## Build
-Complate-Java can can be build with maven.
+Complate-Java can can be build with maven (Tested with Apache Maven 3.2.3).
 
 
-	 ./mvnw clean install
+	 mwn clean install
