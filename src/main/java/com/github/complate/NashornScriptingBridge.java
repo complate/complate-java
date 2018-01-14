@@ -1,6 +1,6 @@
 package com.github.complate;
 
-import com.github.complate.api.ViewsBundle;
+import com.github.complate.api.ComplateScript;
 import jdk.nashorn.api.scripting.NashornException;
 import jdk.nashorn.api.scripting.NashornScriptEngine;
 import jdk.nashorn.api.scripting.NashornScriptEngineFactory;
@@ -34,7 +34,7 @@ public final class NashornScriptingBridge implements ScriptingEngine {
         addEngineScopeBindings(bindings);
     }
 
-    public void invoke(final ViewsBundle bundle,
+    public void invoke(final ComplateScript bundle,
                        final String functionName,
                        final Object... args) throws ScriptingException {
 
@@ -78,7 +78,7 @@ public final class NashornScriptingBridge implements ScriptingEngine {
         }
     }
 
-    private static Reader readerForScript(final ViewsBundle scriptLocation)
+    private static Reader readerForScript(final ComplateScript scriptLocation)
             throws IOException {
         final InputStream is;
         try {
