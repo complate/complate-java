@@ -1,9 +1,9 @@
 package com.github.complate;
 
+import com.github.complate.api.ViewsBundle;
 import jdk.nashorn.api.scripting.NashornException;
 import jdk.nashorn.api.scripting.NashornScriptEngine;
 import jdk.nashorn.api.scripting.NashornScriptEngineFactory;
-import org.springframework.core.io.Resource;
 
 import javax.script.Bindings;
 import javax.script.ScriptContext;
@@ -34,7 +34,7 @@ public final class NashornScriptingBridge implements ScriptingEngine {
         addEngineScopeBindings(bindings);
     }
 
-    public void invoke(final Resource bundle,
+    public void invoke(final ViewsBundle bundle,
                        final String functionName,
                        final Object... args) throws ScriptingException {
 
@@ -78,7 +78,7 @@ public final class NashornScriptingBridge implements ScriptingEngine {
         }
     }
 
-    private static Reader readerForScript(final Resource scriptLocation)
+    private static Reader readerForScript(final ViewsBundle scriptLocation)
             throws IOException {
         final InputStream is;
         try {
