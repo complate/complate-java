@@ -1,5 +1,7 @@
 package com.github.complate;
 
+import com.github.complate.api.ComplateStream;
+
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
