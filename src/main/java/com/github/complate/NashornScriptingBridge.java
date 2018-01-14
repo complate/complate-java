@@ -1,7 +1,7 @@
 package com.github.complate;
 
-import com.github.complate.api.ComplateScript;
 import com.github.complate.api.ComplateEngine;
+import com.github.complate.api.ComplateScript;
 import com.github.complate.api.ComplateStream;
 import jdk.nashorn.api.scripting.NashornException;
 import jdk.nashorn.api.scripting.NashornScriptEngine;
@@ -11,7 +11,16 @@ import javax.script.Bindings;
 import javax.script.ScriptContext;
 import javax.script.ScriptEngine;
 import javax.script.ScriptException;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.SequenceInputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -39,7 +48,7 @@ public final class NashornScriptingBridge implements ComplateEngine {
     public void invoke(final ComplateScript bundle,
                        final ComplateStream stream,
                        final String tag,
-                       final Object... args) throws ScriptingException {
+                       final Object... parameters) throws ScriptingException {
         final String functionName = "render";
 
         try (Reader reader = readerForScript(bundle)) {
@@ -59,7 +68,8 @@ public final class NashornScriptingBridge implements ComplateEngine {
         }
 
         try {
-            engine.invokeFunction(functionName, stream, tag, args);
+            final Object[] args = toVarArgs(stream, tag, parameters);
+            engine.invokeFunction(functionName, args);
         } catch (ScriptException | NoSuchMethodException err) {
             throw extractJavaScriptError(err)
                     .map(jsError -> new ScriptingException(
@@ -69,6 +79,15 @@ public final class NashornScriptingBridge implements ComplateEngine {
                             "failed to invoke function", "filepath",
                             functionName, err));
         }
+    }
+
+    private static Object[] toVarArgs(ComplateStream stream, String tag,
+                                      Object... parameters) {
+        final List<Object> args = new ArrayList<>();
+        args.add(stream);
+        args.add(tag);
+        args.addAll(Arrays.asList(parameters));
+        return args.toArray();
     }
 
     private static NashornScriptEngine createEngine() {
