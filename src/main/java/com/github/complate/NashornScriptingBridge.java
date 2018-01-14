@@ -1,6 +1,8 @@
 package com.github.complate;
 
 import com.github.complate.api.ComplateScript;
+import com.github.complate.api.ComplateEngine;
+import com.github.complate.api.ComplateStream;
 import jdk.nashorn.api.scripting.NashornException;
 import jdk.nashorn.api.scripting.NashornScriptEngine;
 import jdk.nashorn.api.scripting.NashornScriptEngineFactory;
@@ -13,7 +15,7 @@ import java.io.*;
 import java.util.Map;
 import java.util.Optional;
 
-public final class NashornScriptingBridge implements ScriptingEngine {
+public final class NashornScriptingBridge implements ComplateEngine {
 
     private final NashornScriptEngine engine;
 
@@ -35,8 +37,10 @@ public final class NashornScriptingBridge implements ScriptingEngine {
     }
 
     public void invoke(final ComplateScript bundle,
-                       final String functionName,
+                       final ComplateStream stream,
+                       final String tag,
                        final Object... args) throws ScriptingException {
+        final String functionName = "render";
 
         try (Reader reader = readerForScript(bundle)) {
             engine.eval(reader);
@@ -55,7 +59,7 @@ public final class NashornScriptingBridge implements ScriptingEngine {
         }
 
         try {
-            engine.invokeFunction(functionName, args);
+            engine.invokeFunction(functionName, stream, tag, args);
         } catch (ScriptException | NoSuchMethodException err) {
             throw extractJavaScriptError(err)
                     .map(jsError -> new ScriptingException(
