@@ -1,7 +1,5 @@
-package com.github.complate;
+package com.github.complate.api;
 
-import com.github.complate.api.ComplateEngine;
-import com.github.complate.api.ComplateScript;
 import com.github.complate.impl.io.ClasspathComplateScript;
 import com.github.complate.impl.io.StringComplateStream;
 import org.junit.Test;
@@ -12,11 +10,11 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class NashornScriptingBridgeTest {
+public class ComplateEngineTest {
 
     @Test
     public void invoke_with_valid_input_should_work() {
-        ComplateEngine sut = new NashornScriptingBridge();
+        ComplateEngine sut = ComplateEngine.create();
 
         ComplateScript script = new ClasspathComplateScript("/bundle.js");
         StringComplateStream stream = new StringComplateStream();
@@ -34,7 +32,7 @@ public class NashornScriptingBridgeTest {
 
     @Test
     public void invoke_should_provide_global_object_for_script() {
-        ComplateEngine sut = new NashornScriptingBridge();
+        ComplateEngine sut = ComplateEngine.create();
 
         ComplateScript script = new ClasspathComplateScript("/bundle-global-obj.js");
         StringComplateStream stream = new StringComplateStream();
@@ -51,7 +49,7 @@ public class NashornScriptingBridgeTest {
         bindings.put("firstBinding", new TestBinding("First binding says"));
         bindings.put("secondBinding", new TestBinding("Second binding says"));
 
-        ComplateEngine sut = new NashornScriptingBridge(bindings);
+        ComplateEngine sut = ComplateEngine.create(bindings);
 
         ComplateScript script = new ClasspathComplateScript("/bundle-bindings-test.js");
         StringComplateStream stream = new StringComplateStream();

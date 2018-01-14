@@ -1,6 +1,7 @@
 package com.github.complate.api;
 
-import com.github.complate.ScriptingException;
+import java.util.Collections;
+import java.util.Map;
 
 /**
  * Engine that is used to execute a given {@link ComplateScript} and writes its
@@ -26,4 +27,24 @@ public interface ComplateEngine {
      */
     void invoke(ComplateScript script, ComplateStream stream, String tag,
                 Object... parameters) throws ScriptingException;
+
+    /**
+     * Creates a new complate engine without any bindings.
+     *
+     * @return a freshly created complate engine without any bindings
+     */
+    static ComplateEngine create() {
+        return create(Collections.emptyMap());
+    }
+
+    /**
+     * Creates a new complate engine with the given bindings.
+     *
+     * @param bindings the bindings that should be available to the script on
+     *                 invocation
+     * @return a freshly created complate engine with the given bindings
+     */
+    static ComplateEngine create(Map<String, Object> bindings) {
+        return new NashornComplateEngine(bindings);
+    }
 }

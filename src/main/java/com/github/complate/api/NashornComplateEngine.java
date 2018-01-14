@@ -1,8 +1,5 @@
-package com.github.complate;
+package com.github.complate.api;
 
-import com.github.complate.api.ComplateEngine;
-import com.github.complate.api.ComplateScript;
-import com.github.complate.api.ComplateStream;
 import jdk.nashorn.api.scripting.NashornException;
 import jdk.nashorn.api.scripting.NashornScriptEngine;
 import jdk.nashorn.api.scripting.NashornScriptEngineFactory;
@@ -24,7 +21,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public final class NashornScriptingBridge implements ComplateEngine {
+/**
+ * {@link NashornScriptEngine} based {@link ComplateEngine}.
+ */
+final class NashornComplateEngine implements ComplateEngine {
 
     private final NashornScriptEngine engine;
 
@@ -36,12 +36,8 @@ public final class NashornScriptingBridge implements ComplateEngine {
             "    var console = { log: print, error: print };\n" +
             "}\n\n";
 
-    public NashornScriptingBridge() {
+    public NashornComplateEngine(final Map<String,Object> bindings) {
         this.engine = createEngine();
-    }
-
-    public NashornScriptingBridge(final Map<String,Object> bindings) {
-        this();
         addEngineScopeBindings(bindings);
     }
 

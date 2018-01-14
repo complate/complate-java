@@ -1,4 +1,4 @@
-package com.github.complate;
+package com.github.complate.api;
 
 public final class ScriptingException extends RuntimeException {
 
