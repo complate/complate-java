@@ -44,21 +44,21 @@ final class NashornComplateEngine implements ComplateEngine {
     public void invoke(final ComplateScript bundle,
                        final ComplateStream stream,
                        final String tag,
-                       final Object... parameters) throws ScriptingException {
+                       final Object... parameters) throws ComplateException {
         final String functionName = "render";
 
         try (Reader reader = readerForScript(bundle)) {
             engine.eval(reader);
         } catch (IOException err) {
-            throw new ScriptingException(String.format(
+            throw new ComplateException(String.format(
                     "failed to read script from resource '%s'",
                     bundle.getDescription()), err);
         } catch (ScriptException err) {
             throw extractJavaScriptError(err)
-                    .map(jsError -> new ScriptingException(
+                    .map(jsError -> new ComplateException(
                             "failed to evaluate script",
                             "filepath", functionName, err, jsError))
-                    .orElseGet(() -> new ScriptingException(
+                    .orElseGet(() -> new ComplateException(
                             "failed to evaluate script", "filepath",
                             functionName, err));
         }
@@ -68,10 +68,10 @@ final class NashornComplateEngine implements ComplateEngine {
             engine.invokeFunction(functionName, args);
         } catch (ScriptException | NoSuchMethodException err) {
             throw extractJavaScriptError(err)
-                    .map(jsError -> new ScriptingException(
+                    .map(jsError -> new ComplateException(
                             "failed to invoke function",
                             "filepath", functionName, err, jsError))
-                    .orElseGet(() -> new ScriptingException(
+                    .orElseGet(() -> new ComplateException(
                             "failed to invoke function", "filepath",
                             functionName, err));
         }
@@ -90,7 +90,7 @@ final class NashornComplateEngine implements ComplateEngine {
         final ScriptEngine engine =
                 new NashornScriptEngineFactory().getScriptEngine();
         if (engine == null) {
-            throw new ScriptingException(
+            throw new ComplateException(
                     "Cannot instantiate Nashorn Script Engine");
         } else {
             return (NashornScriptEngine) engine;
@@ -103,7 +103,7 @@ final class NashornComplateEngine implements ComplateEngine {
         try {
             is = scriptLocation.getInputStream();
         } catch (IOException err) {
-            throw new ScriptingException(String.format(
+            throw new ComplateException(String.format(
                     "failed to initialize input stream for resource '%s'",
                     scriptLocation.getDescription()), err);
         }

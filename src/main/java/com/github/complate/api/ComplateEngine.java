@@ -23,10 +23,10 @@ public interface ComplateEngine {
      *                   script
      * @param parameters the optional parameters that are passed to the render
      *                   function of the script
-     * @throws ScriptingException if any error occurs
+     * @throws ComplateException if any error occurs
      */
     void invoke(ComplateScript script, ComplateStream stream, String tag,
-                Object... parameters) throws ScriptingException;
+                Object... parameters) throws ComplateException;
 
     /**
      * Creates a new complate engine without any bindings.
