@@ -6,11 +6,11 @@ import java.io.InputStream;
 /**
  * IO Abstraction for a JavaScript script that is used by complate.
  * <p>The script is required to declare a function named <strong>render</strong>
- * that takes the arguments <strong>stream</strong>, <strong>tag</strong> and
- * <strong>params</strong>. The following code snippet shows an simple example:
+ * that takes the arguments <strong>view</strong>, <strong>params</strong> and
+ * <strong>stream</strong>. The following code snippet shows an simple example:
  * <pre>{@code
- * function render(stream, tag, params) {
- *   stream.writeln(tag);
+ * function render(view, params, stream) {
+ *   stream.writeln(view);
  *   stream.writeln(params);
  *   stream.flush();
  * }
