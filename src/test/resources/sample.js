@@ -435,7 +435,7 @@ var views = Object.freeze({
 var renderer = new Renderer$1("<!DOCTYPE html>");
 Object.keys(views).map(function (key) {
 	return views[key];
-}).map(function (view) {
+}).forEach(function (view) {
 	return renderer.registerView(view);
 });
 var index = renderer.renderView.bind(renderer);
