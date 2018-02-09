@@ -14,6 +14,23 @@ public interface ComplateEngine {
 
     /**
      * Invokes the <strong>render</strong> function of the given
+     * {@link ComplateScript} with the given stream and tag without any
+     * parameters.
+     *
+     * @param script     the script to be used as source
+     * @param stream     the stream to be passed into the render function of the
+     *                   script
+     * @param tag        the tag that is passed to the render function of the
+     *                   script
+     * @throws ComplateException if any error occurs
+     */
+    default void invoke(ComplateScript script, ComplateStream stream,
+                String tag) throws ComplateException {
+        invoke(script, stream, tag, null);
+    }
+
+    /**
+     * Invokes the <strong>render</strong> function of the given
      * {@link ComplateScript} with the given stream, tag and parameters.
      *
      * @param script     the script to be used as source
@@ -21,12 +38,12 @@ public interface ComplateEngine {
      *                   script
      * @param tag        the tag that is passed to the render function of the
      *                   script
-     * @param parameters the optional parameters that are passed to the render
-     *                   function of the script
+     * @param parameters the parameters that are passed to the render
+     *                   function of the script. May be <code>null</code>.
      * @throws ComplateException if any error occurs
      */
     void invoke(ComplateScript script, ComplateStream stream, String tag,
-                Object... parameters) throws ComplateException;
+                Map<String, ?> parameters) throws ComplateException;
 
     /**
      * Creates a new complate engine without any bindings.

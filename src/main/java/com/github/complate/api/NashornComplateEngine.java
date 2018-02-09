@@ -16,6 +16,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.SequenceInputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -43,7 +44,8 @@ final class NashornComplateEngine implements ComplateEngine {
     public void invoke(final ComplateScript bundle,
                        final ComplateStream stream,
                        final String tag,
-                       final Object... parameters) throws ComplateException {
+                       final Map<String, ?> parameters)
+            throws ComplateException {
         final String functionName = "render";
 
         try (Reader reader = readerForScript(bundle)) {
@@ -77,10 +79,10 @@ final class NashornComplateEngine implements ComplateEngine {
     }
 
     private static Object[] toVarArgs(ComplateStream stream, String tag,
-                                      Object... parameters) {
+                                      Map<String, ?> parameters) {
         final List<Object> args = new ArrayList<>();
         args.add(tag);
-        args.add(parameters.length == 0 ? parameters : parameters[0]);
+        args.add(parameters == null ? Collections.emptyMap() : parameters);
         args.add(stream);
         return args.toArray();
     }

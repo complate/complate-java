@@ -90,7 +90,7 @@ public class ComplateSampleTest {
             result);
     }
 
-    private String render(String tag, Object... parameters) {
+    private String render(String tag, Map<String, ?> parameters) {
         final ComplateEngine engine = ComplateEngine.create();
         final ComplateScript script = new ClasspathComplateScript("/sample.js");
         final StringComplateStream stream = new StringComplateStream();
