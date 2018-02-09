@@ -16,7 +16,6 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.SequenceInputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -80,9 +79,9 @@ final class NashornComplateEngine implements ComplateEngine {
     private static Object[] toVarArgs(ComplateStream stream, String tag,
                                       Object... parameters) {
         final List<Object> args = new ArrayList<>();
-        args.add(stream);
         args.add(tag);
-        args.addAll(Arrays.asList(parameters));
+        args.add(parameters.length == 0 ? parameters : parameters[0]);
+        args.add(stream);
         return args.toArray();
     }
 
