@@ -37,13 +37,13 @@ public abstract class ComplateDelegatingStream implements ComplateStream {
     }
 
     @Override
-    public final void write(String string) {
-        delegatee.write(string);
+    public final void write(Object object) {
+        delegatee.write(object);
     }
 
     @Override
-    public final void writeln(String string) {
-        delegatee.writeln(string);
+    public final void writeln(Object object) {
+        delegatee.writeln(object);
     }
 
     @Override

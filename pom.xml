@@ -99,6 +99,7 @@
     <maven.compiler.target>${java.version}</maven.compiler.target>
     <project.build.outputTimestamp>2017-05-28T07:08:00Z</project.build.outputTimestamp>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <graalvm.version>20.0.0</graalvm.version>
   </properties>
 
   <dependencyManagement>
@@ -112,6 +113,11 @@
         <groupId>org.assertj</groupId>
         <artifactId>assertj-core</artifactId>
         <version>3.15.0</version>
+      </dependency>
+      <dependency>
+        <groupId>org.graalvm.js</groupId>
+        <artifactId>js</artifactId>
+        <version>${graalvm.version}</version>
       </dependency>
       <dependency>
         <groupId>org.mockito</groupId>
@@ -129,6 +135,10 @@
   </dependencyManagement>
 
   <dependencies>
+    <dependency>
+      <groupId>org.graalvm.js</groupId>
+      <artifactId>js</artifactId>
+    </dependency>
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>

@@ -46,7 +46,7 @@ public class ComplateHttpServletResponseStreamTests {
         sut.write("Foo");
 
         // assert
-        verify(writer, only()).print("Foo");
+        verify(writer, only()).print((Object) "Foo");
     }
 
     @Test
@@ -55,7 +55,7 @@ public class ComplateHttpServletResponseStreamTests {
         sut.writeln("Foo");
 
         // assert
-        verify(writer, only()).println("Foo");
+        verify(writer, only()).println((Object) "Foo");
     }
 
     @Test

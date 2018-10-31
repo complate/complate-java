@@ -41,13 +41,13 @@ public final class ComplatePrintWriterStream implements ComplateStream {
     }
 
     @Override
-    public void write(String string) {
-        writer.print(string);
+    public void write(Object object) {
+        writer.print(object);
     }
 
     @Override
-    public void writeln(String string) {
-        writer.println(string);
+    public void writeln(Object object) {
+        writer.println(object);
     }
 
     @Override
