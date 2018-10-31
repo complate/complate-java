@@ -50,13 +50,13 @@ public final class ComplateStringStream implements ComplateStream {
     }
 
     @Override
-    public void write(String string) {
-        out.print(string);
+    public void write(Object object) {
+        out.print(object);
     }
 
     @Override
-    public void writeln(String string) {
-        out.println(string);
+    public void writeln(Object object) {
+        out.println(object);
     }
 
     @Override

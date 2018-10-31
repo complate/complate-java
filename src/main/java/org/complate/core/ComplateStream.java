@@ -30,16 +30,16 @@ public interface ComplateStream {
     /**
      * Writes the given string.
      *
-     * @param string The <code>String</code> to be written
+     * @param object The <code>Object</code> to be written
      */
-    void write(String string);
+    void write(Object object);
 
     /**
      * Writes the given string and terminates the line.
      *
-     * @param string The <code>String</code> to be written
+     * @param object The <code>Object</code> to be written
      */
-    void writeln(String string);
+    void writeln(Object object);
 
     /**
      * Flushes the stream.
