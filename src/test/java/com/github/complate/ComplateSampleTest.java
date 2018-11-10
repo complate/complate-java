@@ -1,7 +1,7 @@
 package com.github.complate;
 
-import com.github.complate.api.ComplateEngine;
-import com.github.complate.api.ComplateScript;
+import com.github.complate.api.ComplateBundle;
+import com.github.complate.api.NashornComplateBundle;
 import com.github.complate.impl.io.ClasspathComplateScript;
 import com.github.complate.impl.io.StringComplateStream;
 import org.junit.Test;
@@ -16,6 +16,9 @@ import static org.junit.Assert.assertEquals;
  * "integration tests".
  */
 public class ComplateSampleTest {
+
+    private final ComplateBundle bundle = new NashornComplateBundle(
+        new ClasspathComplateScript("/sample.js"));
 
     @Test
     public void siteIndex_without_layout_should_be_rendered_correct() {
@@ -91,12 +94,8 @@ public class ComplateSampleTest {
     }
 
     private String render(String tag, Map<String, ?> parameters) {
-        final ComplateEngine engine = ComplateEngine.create();
-        final ComplateScript script = new ClasspathComplateScript("/sample.js");
         final StringComplateStream stream = new StringComplateStream();
-
-        engine.invoke(script, stream, tag, parameters);
-
+        bundle.render(stream, tag, parameters);
         return stream.getContent();
     }
 }

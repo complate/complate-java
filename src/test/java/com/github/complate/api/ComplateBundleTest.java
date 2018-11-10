@@ -10,55 +10,58 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ComplateEngineTest {
+public class ComplateBundleTest {
 
     @Test
-    public void invoke_with_valid_input_should_work() {
-        ComplateEngine sut = ComplateEngine.create();
-
+    public void render_with_valid_input_should_work() {
         ComplateScript script = new ClasspathComplateScript("/bundle.js");
+
+        ComplateBundle sut = new NashornComplateBundle(script);
+
         StringComplateStream stream = new StringComplateStream();
 
         String tag = "my-site-index";
         Map<String, String> parameters =
             Collections.singletonMap("title", "ვეპხის ტყაოსანი შოთა რუსთაველი");
 
-        sut.invoke(script, stream, tag, parameters);
+        sut.render(stream, tag, parameters);
 
         assertThat(stream.getContent())
             .isEqualTo("my-site-index\n" +
-                       "ვეპხის ტყაოსანი შოთა რუსთაველი\n");
+                "ვეპხის ტყაოსანი შოთა რუსთაველი\n");
     }
 
     @Test
-    public void invoke_should_provide_global_object_for_script() {
-        ComplateEngine sut = ComplateEngine.create();
-
+    public void render_should_provide_global_object_for_script() {
         ComplateScript script = new ClasspathComplateScript("/bundle-global-obj.js");
+
+        ComplateBundle sut = new NashornComplateBundle(script);
+
         StringComplateStream stream = new StringComplateStream();
 
-        sut.invoke(script, stream, "");
+        sut.render(stream, "");
 
         assertThat(stream.getContent())
             .isEqualTo("[object global]\n");
     }
 
     @Test
-    public void invoke_should_provide_bindings_for_script() {
+    public void render_should_provide_bindings_for_script() {
+        ComplateScript script = new ClasspathComplateScript("/bundle-bindings-test.js");
+
         Map<String, Object> bindings = new HashMap<>();
         bindings.put("firstBinding", new TestBinding("First binding says"));
         bindings.put("secondBinding", new TestBinding("Second binding says"));
 
-        ComplateEngine sut = ComplateEngine.create(bindings);
+        ComplateBundle sut = new NashornComplateBundle(script, bindings);
 
-        ComplateScript script = new ClasspathComplateScript("/bundle-bindings-test.js");
         StringComplateStream stream = new StringComplateStream();
 
-        sut.invoke(script, stream, "");
+        sut.render(stream, "");
 
         assertThat(stream.getContent())
             .isEqualTo("First binding says: Hello World!\n" +
-                       "Second binding says: Bye World!\n");
+                "Second binding says: Bye World!\n");
     }
 
     public static final class TestBinding {
