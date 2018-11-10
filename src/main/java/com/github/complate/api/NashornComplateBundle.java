@@ -129,9 +129,9 @@ public final class NashornComplateBundle implements ComplateBundle {
     private static Object[] toVarArgs(final ComplateStream stream,
             final String tag, final Map<String, ?> parameters) {
         final Object[] args = new Object[3];
-        args[0] = tag;
-        args[1] = parameters == null ? emptyMap() : parameters;
-        args[2] = stream;
+        args[0] = stream;
+        args[1] = tag;
+        args[2] = parameters == null ? emptyMap() : parameters;
         return args;
     }
 }
