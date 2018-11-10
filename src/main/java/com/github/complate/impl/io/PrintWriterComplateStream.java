@@ -5,6 +5,7 @@ import com.github.complate.api.ComplateStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import static com.github.complate.impl.io.PrintWriterComplateStream.FlushMode.ALWAYS;
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -16,9 +17,15 @@ import static java.util.Objects.requireNonNull;
 public final class PrintWriterComplateStream implements ComplateStream {
 
     private final PrintWriter writer;
+    private final FlushMode flushMode;
 
     public PrintWriterComplateStream(PrintWriter writer) {
+        this(writer, ALWAYS);
+    }
+
+    public PrintWriterComplateStream(PrintWriter writer, FlushMode flushMode) {
         this.writer = requireNonNull(writer, "writer must not be null");
+        this.flushMode = requireNonNull(flushMode, "flushMode must not be null");
     }
 
     @Override
@@ -33,6 +40,26 @@ public final class PrintWriterComplateStream implements ComplateStream {
 
     @Override
     public void flush() throws IOException {
-        writer.flush();
+        if (flushMode.shouldFlush()) {
+            writer.flush();
+        }
+    }
+
+    public enum FlushMode {
+        ALWAYS {
+            @Override
+            boolean shouldFlush() {
+                return true;
+            }
+        },
+        NEVER {
+            @Override
+            boolean shouldFlush() {
+                return false;
+            }
+        };
+
+        abstract boolean shouldFlush();
+
     }
 }
