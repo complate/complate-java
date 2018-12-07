@@ -1,6 +1,6 @@
-package com.github.complate.impl.io;
+package com.github.complate.core.stream;
 
-import com.github.complate.api.ComplateStream;
+import com.github.complate.core.ComplateStream;
 import org.junit.Test;
 
 import static org.mockito.Mockito.mock;

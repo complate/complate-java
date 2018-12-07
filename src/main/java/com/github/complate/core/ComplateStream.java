@@ -1,4 +1,4 @@
-package com.github.complate.api;
+package com.github.complate.core;
 
 import java.io.IOException;
 

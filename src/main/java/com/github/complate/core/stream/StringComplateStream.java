@@ -1,13 +1,12 @@
-package com.github.complate.impl.io;
+package com.github.complate.core.stream;
 
-import com.github.complate.api.ComplateStream;
+import com.github.complate.core.ComplateStream;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.PrintStream;
 
 /**
- * {@link ComplateStream} that captures all calls to write in a {@link String}
+ * {@link ComplateStream} that captures all write calls in a {@link String}
  * which can be retrieved calling {@link #getContent()}.
  */
 public final class StringComplateStream implements ComplateStream {
@@ -43,7 +42,7 @@ public final class StringComplateStream implements ComplateStream {
     }
 
     @Override
-    public void flush() throws IOException {
+    public void flush() {
         out.flush();
     }
 }

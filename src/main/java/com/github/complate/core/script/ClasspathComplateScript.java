@@ -1,14 +1,14 @@
-package com.github.complate.impl.io;
+package com.github.complate.core.script;
 
-import com.github.complate.api.ComplateScript;
+import com.github.complate.core.ComplateScript;
 
-import java.io.IOException;
 import java.io.InputStream;
 
 import static java.util.Objects.requireNonNull;
 
 /**
- * {@link ComplateScript} that uses the java class path.
+ * {@link ComplateScript} that loads a JavaScript resource using the java class
+ * path.
  *
  * @author Michael Vitz
  * @since 0.1.0
@@ -18,7 +18,7 @@ public final class ClasspathComplateScript implements ComplateScript {
     private final String name;
 
     /**
-     * Creates a new class path base script with the given name.
+     * Creates a new class path based script with the given name.
      *
      * @param name the name of the script. If not absolute it starts at the
      *             package of this class.
@@ -28,7 +28,7 @@ public final class ClasspathComplateScript implements ComplateScript {
     }
 
     @Override
-    public InputStream getInputStream() throws IOException {
+    public InputStream getInputStream() {
         return ClasspathComplateScript.class.getResourceAsStream(name);
     }
 

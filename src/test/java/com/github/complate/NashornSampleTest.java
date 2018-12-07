@@ -1,9 +1,9 @@
 package com.github.complate;
 
-import com.github.complate.api.ComplateBundle;
-import com.github.complate.api.NashornComplateBundle;
-import com.github.complate.impl.io.ClasspathComplateScript;
-import com.github.complate.impl.io.StringComplateStream;
+import com.github.complate.core.ComplateRenderer;
+import com.github.complate.nashorn.renderer.NashornComplateRenderer;
+import com.github.complate.core.script.ClasspathComplateScript;
+import com.github.complate.core.stream.StringComplateStream;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -15,9 +15,9 @@ import static org.junit.Assert.assertEquals;
  * Uses the transpiled output of https://github.com/complate/complate-sample as
  * "integration tests".
  */
-public class ComplateSampleTest {
+public class NashornSampleTest {
 
-    private final ComplateBundle bundle = new NashornComplateBundle(
+    private final ComplateRenderer renderer = new NashornComplateRenderer(
         new ClasspathComplateScript("/sample.js"));
 
     @Test
@@ -93,9 +93,9 @@ public class ComplateSampleTest {
             result);
     }
 
-    private String render(String tag, Map<String, ?> parameters) {
+    private String render(String view, Map<String, ?> parameters) {
         final StringComplateStream stream = new StringComplateStream();
-        bundle.render(stream, tag, parameters);
+        renderer.render(view, parameters, stream);
         return stream.getContent();
     }
 }

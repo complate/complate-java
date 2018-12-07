@@ -1,4 +1,4 @@
-function render(stream, tag, params) {
-  stream.writeln(global);
-  stream.flush();
+function render(view, params, stream) {
+    stream.writeln(global);
+    stream.flush();
 }

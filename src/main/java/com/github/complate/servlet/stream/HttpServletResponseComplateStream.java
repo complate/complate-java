@@ -1,14 +1,14 @@
-package com.github.complate.impl.servlet;
+package com.github.complate.servlet.stream;
 
-import com.github.complate.api.ComplateStream;
-import com.github.complate.impl.io.DelegatingComplateStream;
-import com.github.complate.impl.io.PrintWriterComplateStream;
-import com.github.complate.impl.io.PrintWriterComplateStream.FlushMode;
+import com.github.complate.core.ComplateStream;
+import com.github.complate.core.stream.DelegatingComplateStream;
+import com.github.complate.core.stream.PrintWriterComplateStream;
+import com.github.complate.core.stream.PrintWriterComplateStream.FlushMode;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static com.github.complate.impl.io.PrintWriterComplateStream.FlushMode.ALWAYS;
+import static com.github.complate.core.stream.PrintWriterComplateStream.FlushMode.ALWAYS;
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -19,8 +19,7 @@ import static java.util.Objects.requireNonNull;
  * @see #fromResponse(HttpServletResponse)
  * @since 0.1.0
  */
-public final class HttpServletResponseComplateStream
-        extends DelegatingComplateStream {
+public final class HttpServletResponseComplateStream extends DelegatingComplateStream {
 
     private HttpServletResponseComplateStream(ComplateStream stream) {
         super(stream);

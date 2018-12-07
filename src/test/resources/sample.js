@@ -248,7 +248,7 @@ var Renderer$1 = function () {
 		}
 	}, {
 		key: "renderView",
-		value: function renderView(stream, view, params) {
+		value: function renderView(view, params, stream) {
 			var _ref = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {},
 			    fragment = _ref.fragment;
 			var callback = arguments[4];

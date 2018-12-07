@@ -1,6 +1,6 @@
-package com.github.complate.impl.io;
+package com.github.complate.core.stream;
 
-import com.github.complate.api.ComplateStream;
+import com.github.complate.core.ComplateStream;
 
 import java.io.IOException;
 
@@ -19,17 +19,17 @@ public abstract class DelegatingComplateStream implements ComplateStream {
     }
 
     @Override
-    public void write(String s) {
+    public final void write(String s) {
         delegatee.write(s);
     }
 
     @Override
-    public void writeln(String s) {
+    public final void writeln(String s) {
         delegatee.writeln(s);
     }
 
     @Override
-    public void flush() throws IOException {
+    public final void flush() throws IOException {
         delegatee.flush();
     }
 }

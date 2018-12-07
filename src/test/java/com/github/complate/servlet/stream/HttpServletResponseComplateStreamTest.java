@@ -1,4 +1,4 @@
-package com.github.complate.impl.servlet;
+package com.github.complate.servlet.stream;
 
 import org.junit.Before;
 import org.junit.Test;

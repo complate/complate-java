@@ -1,11 +1,11 @@
-package com.github.complate.impl.io;
+package com.github.complate.core.stream;
 
-import com.github.complate.api.ComplateStream;
+import com.github.complate.core.ComplateStream;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import static com.github.complate.impl.io.PrintWriterComplateStream.FlushMode.ALWAYS;
+import static com.github.complate.core.stream.PrintWriterComplateStream.FlushMode.ALWAYS;
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -19,10 +19,23 @@ public final class PrintWriterComplateStream implements ComplateStream {
     private final PrintWriter writer;
     private final FlushMode flushMode;
 
+    /**
+     * Creates a new stream using the given <code>PrintWriter</code> with
+     * {@link FlushMode#ALWAYS}.
+     *
+     * @param writer the writer used to write the output
+     */
     public PrintWriterComplateStream(PrintWriter writer) {
         this(writer, ALWAYS);
     }
 
+    /**
+     * Creates a new stream using the given <code>PrintWriter</code> and
+     * <code>FlushMode</code>.
+     *
+     * @param writer the writer used to write the output
+     * @param flushMode the flush mode that should be used
+     */
     public PrintWriterComplateStream(PrintWriter writer, FlushMode flushMode) {
         this.writer = requireNonNull(writer, "writer must not be null");
         this.flushMode = requireNonNull(flushMode, "flushMode must not be null");
@@ -60,6 +73,5 @@ public final class PrintWriterComplateStream implements ComplateStream {
         };
 
         abstract boolean shouldFlush();
-
     }
 }

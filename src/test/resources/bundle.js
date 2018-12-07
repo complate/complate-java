@@ -1,5 +1,5 @@
-function render(stream, tag, params) {
-  stream.writeln(tag);
-  stream.writeln(params.title);
-  stream.flush();
+function render(view, params, stream) {
+    stream.writeln(view);
+    stream.writeln(params.title);
+    stream.flush();
 }
