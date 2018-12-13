@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -38,11 +39,7 @@ public final class NashornComplateRenderer implements ComplateRenderer {
 
     private final NashornScriptEngine engine;
 
-    public NashornComplateRenderer(ComplateScript script) {
-        this(script, emptyMap());
-    }
-
-    public NashornComplateRenderer(ComplateScript script, Map<String, ?> bindings) {
+    private NashornComplateRenderer(ComplateScript script, Map<String, ?> bindings) {
         engine = createEngine(bindings);
 
         try {
@@ -122,4 +119,59 @@ public final class NashornComplateRenderer implements ComplateRenderer {
         args[2] = stream;
         return args;
     }
+
+    public static NashornComplateRendererBuilder nashornComplateRenderer(ComplateScript script) {
+        return new NashornComplateRendererBuilder(script);
+    }
+
+    public static final class NashornComplateRendererBuilder {
+
+        private final ComplateScript script;
+        private final Map<String, Object> bindings = new HashMap<>();
+        private boolean cacheScriptEvaluation = true;
+
+        private NashornComplateRendererBuilder(ComplateScript script) {
+            this.script = script;
+        }
+
+        public NashornComplateRendererBuilder withBindings(Map<String, ?> bindings) {
+            this.bindings.putAll(bindings);
+            return this;
+        }
+
+        public NashornComplateRendererBuilder withBinding(String name, Object value) {
+            this.bindings.put(name, value);
+            return this;
+        }
+
+        public NashornComplateRendererBuilder cacheScriptEvaluation(boolean cacheScriptEvaluation) {
+            this.cacheScriptEvaluation = cacheScriptEvaluation;
+            return this;
+        }
+
+        public ComplateRenderer build() {
+            if (cacheScriptEvaluation) {
+                return new NashornComplateRenderer(script, bindings);
+            } else {
+                return new AlwaysEvaluatingNashornComplateRenderer(script, bindings);
+            }
+        }
+    }
+
+    private static final class AlwaysEvaluatingNashornComplateRenderer implements ComplateRenderer {
+
+        private final ComplateScript script;
+        private final Map<String, ?> bindings;
+
+        private AlwaysEvaluatingNashornComplateRenderer(ComplateScript script, Map<String, ?> bindings) {
+            this.script = script;
+            this.bindings = bindings;
+        }
+
+        @Override
+        public void render(String view, Map<String, ?> parameters, ComplateStream stream) throws ComplateException {
+            new NashornComplateRenderer(script, bindings).render(view, parameters, stream);
+        }
+    }
+
 }

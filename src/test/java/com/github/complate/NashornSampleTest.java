@@ -1,7 +1,6 @@
 package com.github.complate;
 
 import com.github.complate.core.ComplateRenderer;
-import com.github.complate.nashorn.renderer.NashornComplateRenderer;
 import com.github.complate.core.script.ClasspathComplateScript;
 import com.github.complate.core.stream.StringComplateStream;
 import org.junit.Test;
@@ -9,6 +8,7 @@ import org.junit.Test;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.github.complate.nashorn.renderer.NashornComplateRenderer.nashornComplateRenderer;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -17,8 +17,8 @@ import static org.junit.Assert.assertEquals;
  */
 public class NashornSampleTest {
 
-    private final ComplateRenderer renderer = new NashornComplateRenderer(
-        new ClasspathComplateScript("/sample.js"));
+    private final ComplateRenderer renderer = nashornComplateRenderer(
+        new ClasspathComplateScript("/sample.js")).build();
 
     @Test
     public void siteIndex_without_layout_should_be_rendered_correct() {

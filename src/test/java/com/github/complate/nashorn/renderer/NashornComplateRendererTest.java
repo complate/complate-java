@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.github.complate.nashorn.renderer.NashornComplateRenderer.nashornComplateRenderer;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class NashornComplateRendererTest {
@@ -18,7 +19,7 @@ public class NashornComplateRendererTest {
     public void render_with_valid_input_should_work() {
         ComplateScript script = new ClasspathComplateScript("/bundle.js");
 
-        ComplateRenderer sut = new NashornComplateRenderer(script);
+        ComplateRenderer sut = nashornComplateRenderer(script).build();
 
         StringComplateStream stream = new StringComplateStream();
 
@@ -37,7 +38,7 @@ public class NashornComplateRendererTest {
     public void render_should_provide_global_object_for_script() {
         ComplateScript script = new ClasspathComplateScript("/bundle-global-obj.js");
 
-        ComplateRenderer sut = new NashornComplateRenderer(script);
+        ComplateRenderer sut = nashornComplateRenderer(script).build();
 
         StringComplateStream stream = new StringComplateStream();
 
@@ -55,7 +56,9 @@ public class NashornComplateRendererTest {
         bindings.put("firstBinding", new TestBinding("First binding says"));
         bindings.put("secondBinding", new TestBinding("Second binding says"));
 
-        ComplateRenderer sut = new NashornComplateRenderer(script, bindings);
+        ComplateRenderer sut = nashornComplateRenderer(script)
+            .withBindings(bindings)
+            .build();
 
         StringComplateStream stream = new StringComplateStream();
 
