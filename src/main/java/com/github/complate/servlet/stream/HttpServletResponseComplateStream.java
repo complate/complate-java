@@ -3,12 +3,13 @@ package com.github.complate.servlet.stream;
 import com.github.complate.core.ComplateStream;
 import com.github.complate.core.stream.DelegatingComplateStream;
 import com.github.complate.core.stream.PrintWriterComplateStream;
+import com.github.complate.core.stream.PrintWriterComplateStream.DefaultFlushModes;
 import com.github.complate.core.stream.PrintWriterComplateStream.FlushMode;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static com.github.complate.core.stream.PrintWriterComplateStream.FlushMode.ALWAYS;
+import static com.github.complate.core.stream.PrintWriterComplateStream.DefaultFlushModes.ALWAYS;
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -27,7 +28,7 @@ public final class HttpServletResponseComplateStream extends DelegatingComplateS
 
     /**
      * Creates a new complate stream for the given {@link HttpServletResponse}
-     * with {@link FlushMode#ALWAYS}.
+     * with {@link DefaultFlushModes#ALWAYS}.
      *
      * @param response the response that provides the output stream
      * @return a freshly created complate stream

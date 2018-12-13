@@ -2,10 +2,9 @@ package com.github.complate.core.stream;
 
 import com.github.complate.core.ComplateStream;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 
-import static com.github.complate.core.stream.PrintWriterComplateStream.FlushMode.ALWAYS;
+import static com.github.complate.core.stream.PrintWriterComplateStream.DefaultFlushModes.ALWAYS;
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -21,7 +20,7 @@ public final class PrintWriterComplateStream implements ComplateStream {
 
     /**
      * Creates a new stream using the given <code>PrintWriter</code> with
-     * {@link FlushMode#ALWAYS}.
+     * {@link DefaultFlushModes#ALWAYS}.
      *
      * @param writer the writer used to write the output
      */
@@ -52,26 +51,28 @@ public final class PrintWriterComplateStream implements ComplateStream {
     }
 
     @Override
-    public void flush() throws IOException {
+    public void flush() {
         if (flushMode.shouldFlush()) {
             writer.flush();
         }
     }
 
-    public enum FlushMode {
+    public interface FlushMode {
+        boolean shouldFlush();
+    }
+
+    public enum DefaultFlushModes implements FlushMode {
         ALWAYS {
             @Override
-            boolean shouldFlush() {
+            public boolean shouldFlush() {
                 return true;
             }
         },
         NEVER {
             @Override
-            boolean shouldFlush() {
+            public boolean shouldFlush() {
                 return false;
             }
         };
-
-        abstract boolean shouldFlush();
     }
 }
