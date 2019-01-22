@@ -20,9 +20,17 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-import static java.util.Collections.emptyMap;
-import static javax.script.ScriptContext.ENGINE_SCOPE;
-import static jdk.nashorn.api.scripting.NashornException.getScriptStackString;
+import javax.script.Bindings;
+import javax.script.ScriptException;
+
+import com.github.complate.core.ComplateException;
+import com.github.complate.core.ComplateRenderer;
+import com.github.complate.core.ComplateScript;
+import com.github.complate.core.ComplateStream;
+
+import jdk.nashorn.api.scripting.NashornException;
+import jdk.nashorn.api.scripting.NashornScriptEngine;
+import jdk.nashorn.api.scripting.NashornScriptEngineFactory;
 
 /**
  * {@link NashornScriptEngine} based {@link ComplateRenderer}.
@@ -37,10 +45,29 @@ public final class NashornComplateRenderer implements ComplateRenderer {
             "    var console = { log: print, error: print };\n" +
             "}\n\n";
 
-    private final NashornScriptEngine engine;
+    private final ThreadLocal<NashornScriptEngine> engine = new ThreadLocal<NashornScriptEngine>() {
+        @Override
+        protected NashornScriptEngine initialValue() {
+            return initEngine();
+        }
+    };
+
+    private final ComplateScript script;
+    private final Map<String, ?> bindings;
 
     private NashornComplateRenderer(ComplateScript script, Map<String, ?> bindings) {
-        engine = createEngine(bindings);
+        this.script = script;
+        this.bindings = bindings;
+    }
+
+    private NashornScriptEngine initEngine() {
+        final NashornScriptEngine engine = (NashornScriptEngine) new NashornScriptEngineFactory().getScriptEngine();
+        if (engine == null) {
+            throw new ComplateException("Cannot instantiate Nashorn Script Engine");
+        }
+
+        final Bindings engineBindings = engine.getBindings(ENGINE_SCOPE);
+        bindings.forEach(engineBindings::put);
 
         try {
             engine.eval(POLYFILLS);
@@ -49,8 +76,9 @@ public final class NashornComplateRenderer implements ComplateRenderer {
         }
 
         engine.put("javax.script.filename", script.getDescription());
-        try (Reader reader = readerFor(script)) {
+        try (final Reader reader = readerFor(script)) {
             engine.eval(reader);
+            return engine;
         } catch (IOException e) {
             throw new ComplateException("failed to read script from resource '%s'", script.getDescription());
         } catch (ScriptException e) {
@@ -64,7 +92,7 @@ public final class NashornComplateRenderer implements ComplateRenderer {
     public void render(String view, Map<String, ?> parameters, ComplateStream stream) throws ComplateException {
         try {
             final Object[] args = toVarArgs(view, parameters, stream);
-            engine.invokeFunction("render", args);
+            engine.get().invokeFunction("render", args);
         } catch (NoSuchMethodException e) {
             throw new ComplateException(e, "could not find 'render' method in script");
         } catch (ScriptException e) {
@@ -72,24 +100,6 @@ public final class NashornComplateRenderer implements ComplateRenderer {
                 .map(jsError -> new ComplateException(e, "failed to render: %s", jsError))
                 .orElseGet(() -> new ComplateException(e, "failed to render"));
         }
-    }
-
-    private static NashornScriptEngine createEngine(Map<String, ?> bindings) {
-        final NashornScriptEngine engine = createEngine();
-
-        final Bindings engineBindings = engine.getBindings(ENGINE_SCOPE);
-        bindings.forEach(engineBindings::put);
-
-        return engine;
-    }
-
-    private static NashornScriptEngine createEngine() {
-        final ScriptEngine engine =
-            new NashornScriptEngineFactory().getScriptEngine();
-        if (engine == null) {
-            throw new ComplateException("Cannot instantiate Nashorn Script Engine");
-        }
-        return (NashornScriptEngine) engine;
     }
 
     private static Reader readerFor(ComplateScript script) {
@@ -173,5 +183,4 @@ public final class NashornComplateRenderer implements ComplateRenderer {
             new NashornComplateRenderer(script, bindings).render(view, parameters, stream);
         }
     }
-
 }
