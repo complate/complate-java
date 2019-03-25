@@ -1,47 +1,54 @@
-package com.github.complate.impl.servlet;
+package org.complate.servlet;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 
+import static org.complate.servlet.ComplateHttpServletResponseStream.fromResponse;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.only;
 import static org.mockito.Mockito.verify;
 
-public class HttpServletResponseComplateStreamTest {
+public class ComplateHttpServletResponseStreamTests {
 
     HttpServletResponse response = mock(HttpServletResponse.class);
     PrintWriter writer = mock(PrintWriter.class);
 
-    HttpServletResponseComplateStream sut;
+    ComplateHttpServletResponseStream sut;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeEach
+    void setUp() throws Exception {
         given(response.getWriter()).willReturn(writer);
-        sut = HttpServletResponseComplateStream.fromResponse(response);
+        sut = fromResponse(response);
     }
 
     @Test
-    public void write_should_work() {
+    void write_shouldDelegateToResponse() {
+        // act
         sut.write("Foo");
 
+        // assert
         verify(writer, only()).print("Foo");
     }
 
     @Test
-    public void writeln_should_work() {
+    void writeln_shouldDelegateToResponse() {
+        // act
         sut.writeln("Foo");
 
+        // assert
         verify(writer, only()).println("Foo");
     }
 
     @Test
-    public void flush_should_work() throws Exception {
+    void flush_shouldDelegateToResponse() throws Exception {
+        // act
         sut.flush();
 
+        // assert
         verify(writer, only()).flush();
     }
 }

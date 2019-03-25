@@ -1,11 +1,13 @@
-package com.github.complate.api;
+package org.complate.core;
 
 import java.io.IOException;
 
 /**
- * This stream is used by complate for rendering the views.
+ * This stream is used by an {@link ComplateRenderer} to render the views'
+ * result into.
  *
  * @author FND
+ * @author mvitz
  * @since 0.1.0
  */
 public interface ComplateStream {
@@ -13,16 +15,16 @@ public interface ComplateStream {
     /**
      * Writes the given string.
      *
-     * @param s The <code>String</code> to be written
+     * @param string The <code>String</code> to be written
      */
-    void write(String s);
+    void write(String string);
 
     /**
      * Writes the given string and terminates the line.
      *
-     * @param s The <code>String</code> to be written
+     * @param string The <code>String</code> to be written
      */
-    void writeln(String s);
+    void writeln(String string);
 
     /**
      * Flushes the stream.

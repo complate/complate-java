@@ -1,35 +1,41 @@
-package com.github.complate.impl.io;
+package org.complate.core.stream;
 
-import com.github.complate.api.ComplateStream;
-import org.junit.Test;
+import org.complate.core.ComplateStream;
+import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.only;
 import static org.mockito.Mockito.verify;
 
-public class DelegatingComplateStreamTest {
+class ComplateDelegatingStreamTests {
 
     ComplateStream delegatee = mock(ComplateStream.class);
-    DelegatingComplateStream sut = new DelegatingComplateStream(delegatee) {};
+    ComplateDelegatingStream sut = new ComplateDelegatingStream(delegatee) {};
 
     @Test
-    public void write_should_delegate() {
+    void write_should_delegate() {
+        // act
         sut.write("Foo");
 
+        // assert
         verify(delegatee, only()).write("Foo");
     }
 
     @Test
-    public void writeln_should_delegate() {
+    void writeln_should_delegate() {
+        // act
         sut.writeln("Foo");
 
+        // assert
         verify(delegatee, only()).writeln("Foo");
     }
 
     @Test
-    public void flush_should_delegate() throws Exception {
+    void flush_should_delegate() throws Exception {
+        // act
         sut.flush();
 
+        // assert
         verify(delegatee, only()).flush();
     }
 }

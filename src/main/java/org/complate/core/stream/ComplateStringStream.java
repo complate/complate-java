@@ -1,16 +1,18 @@
-package com.github.complate.impl.io;
+package org.complate.core.stream;
 
-import com.github.complate.api.ComplateStream;
+import org.complate.core.ComplateStream;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.PrintStream;
 
 /**
- * {@link ComplateStream} that captures all calls to write in a {@link String}
- * which can be retrieved calling {@link #getContent()}.
+ * {@link ComplateStream} that captures all write calls in a {@link String}
+ * which can be retrieved by calling {@link #getContent()}.
+ *
+ * @author mvitz
+ * @since 0.1.0
  */
-public final class StringComplateStream implements ComplateStream {
+public final class ComplateStringStream implements ComplateStream {
 
     private final ByteArrayOutputStream bytes;
     private final PrintStream out;
@@ -18,7 +20,7 @@ public final class StringComplateStream implements ComplateStream {
     /**
      * Constructs a new stream.
      */
-    public StringComplateStream() {
+    public ComplateStringStream() {
         bytes = new ByteArrayOutputStream();
         out = new PrintStream(bytes);
     }
@@ -33,17 +35,17 @@ public final class StringComplateStream implements ComplateStream {
     }
 
     @Override
-    public void write(String s) {
-        out.print(s);
+    public void write(String string) {
+        out.print(string);
     }
 
     @Override
-    public void writeln(String s) {
-        out.println(s);
+    public void writeln(String string) {
+        out.println(string);
     }
 
     @Override
-    public void flush() throws IOException {
+    public void flush() {
         out.flush();
     }
 }
