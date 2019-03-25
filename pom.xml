@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.github.complate</groupId>
+  <groupId>org.complate</groupId>
   <artifactId>complate-java</artifactId>
   <version>0.1.0-SNAPSHOT</version>
 
@@ -22,7 +21,7 @@
 
   <organization>
     <name>complate</name>
-    <url>https://github.com/complate</url>
+    <url>http://complate.org</url>
   </organization>
 
   <issueManagement>
@@ -35,7 +34,7 @@
       <name>FND</name>
       <url>https://github.com/FND</url>
       <organization>complate</organization>
-      <organizationUrl>https://github.com/complate</organizationUrl>
+      <organizationUrl>http://complate.org</organizationUrl>
     </developer>
     <developer>
       <id>dwestheide</id>
@@ -46,6 +45,7 @@
       <id>mvitz</id>
       <name>Michael Vitz</name>
       <email>michael.vitz at innoq dot com</email>
+      <url>https://innoq.com/en/staff/michael-vitz</url>
       <organization>innoQ Deutschland GmbH</organization>
       <organizationUrl>https://innoq.com</organizationUrl>
       <timezone>Europe/Berlin</timezone>
