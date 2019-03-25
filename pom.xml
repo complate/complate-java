@@ -63,6 +63,13 @@
     <url>https://github.com/complate/complate-java</url>
   </scm>
 
+  <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
+
   <properties>
     <java.version>1.8</java.version>
     <maven.compiler.source>${java.version}</maven.compiler.source>
