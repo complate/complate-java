@@ -24,6 +24,11 @@
     <url>http://complate.org</url>
   </organization>
 
+  <ciManagement>
+    <url>https://travis-ci.org/complate/complate-java</url>
+    <system>Travis CI</system>
+  </ciManagement>
+
   <issueManagement>
     <url>https://github.com/complate/complate-java/issues</url>
     <system>GitHub Issues</system>
