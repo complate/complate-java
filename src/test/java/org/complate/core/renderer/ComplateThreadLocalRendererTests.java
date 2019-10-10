@@ -40,6 +40,7 @@ class ComplateThreadLocalRendererTests {
     void render_delegatesToCreatorReturnedInstance() {
         // arrange
         ComplateRenderer renderer = mock(ComplateRenderer.class);
+        @SuppressWarnings("unchecked")
         Supplier<ComplateRenderer> creator = mock(Supplier.class);
         when(creator.get()).thenReturn(renderer);
 
@@ -55,6 +56,7 @@ class ComplateThreadLocalRendererTests {
     @Test
     void render_createsFreshInstanceForEveryThread() throws Exception {
         // arrange
+        @SuppressWarnings("unchecked")
         Supplier<ComplateRenderer> creator = mock(Supplier.class);
         when(creator.get()).thenReturn(mock(ComplateRenderer.class));
 
@@ -79,6 +81,7 @@ class ComplateThreadLocalRendererTests {
     @Test
     void render_reusesInstanceWithinSameThread() throws Exception {
         // arrange
+        @SuppressWarnings("unchecked")
         Supplier<ComplateRenderer> creator = mock(Supplier.class);
         when(creator.get()).thenReturn(mock(ComplateRenderer.class));
 

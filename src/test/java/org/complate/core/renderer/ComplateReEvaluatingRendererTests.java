@@ -39,10 +39,11 @@ class ComplateReEvaluatingRendererTests {
     void render_delegatesToCreatorReturnedInstance() {
         // arrange
         ComplateRenderer renderer = mock(ComplateRenderer.class);
+        @SuppressWarnings("unchecked")
         Supplier<ComplateRenderer> creator = mock(Supplier.class);
         when(creator.get()).thenReturn(renderer);
 
-        ComplateReEvaluatingRenderer sut = new ComplateReEvaluatingRenderer(creator);
+        ComplateRenderer sut = new ComplateReEvaluatingRenderer(creator);
 
         // act
         sut.render(null, null, null);
