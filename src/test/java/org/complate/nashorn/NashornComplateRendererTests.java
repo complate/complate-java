@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.complate.core;
+package org.complate.nashorn;
 
+import org.complate.core.ComplateRenderer;
 import org.complate.core.source.ComplateClasspathSource;
 import org.complate.core.stream.ComplateStringStream;
-import org.complate.nashorn.NashornComplateRenderer;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -26,7 +26,7 @@ import java.util.Map;
 import static java.util.Collections.emptyMap;
 import static org.assertj.core.api.Assertions.assertThat;
 
-class ComplateRendererTests {
+class NashornComplateRendererTests {
 
     ComplateRenderer sut = new NashornComplateRenderer(
         new ComplateClasspathSource("/simple_bundle.js"),
