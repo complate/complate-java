@@ -5,7 +5,6 @@ install: true
 jdk:
   - openjdk8
   - openjdk11
-  - openjdk12
 script:
   - ./mvnw --batch-mode --errors clean package
 cache:
