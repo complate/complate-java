@@ -53,8 +53,6 @@ public final class NashornComplateRenderer implements ComplateRenderer {
 
     private final NashornScriptEngine engine;
 
-
-
     public NashornComplateRenderer(ComplateSource source, Map<String, ?> bindings) {
         engine = createEngine(bindings);
 

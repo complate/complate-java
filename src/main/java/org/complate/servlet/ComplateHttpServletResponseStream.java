@@ -46,7 +46,7 @@ public final class ComplateHttpServletResponseStream extends ComplateDelegatingS
      * @throws IOException if any I/O error occurs
      */
     public static ComplateHttpServletResponseStream fromResponse(
-        HttpServletResponse response) throws IOException {
+            HttpServletResponse response) throws IOException {
         requireNonNull(response, "response must not be null");
         final ComplateStream stream = new ComplatePrintWriterStream(response.getWriter());
         return new ComplateHttpServletResponseStream(stream);

@@ -28,6 +28,7 @@ class ComplateClasspathSourceTests {
 
     @Test
     void new_withNullName_throwsException() {
+        // act + assert
         assertThatThrownBy(() -> new ComplateClasspathSource(null))
             .isInstanceOf(NullPointerException.class)
             .hasMessage("name must not be null");
@@ -67,5 +68,4 @@ class ComplateClasspathSourceTests {
             assertThat(inputStream).hasContent("function render(view, params, stream) {}");
         }
     }
-
 }
