@@ -324,7 +324,7 @@
             <artifactId>maven-deploy-plugin</artifactId>
             <configuration>
               <updateReleaseInfo>true</updateReleaseInfo>
-           </configuration>
+            </configuration>
           </plugin>
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
