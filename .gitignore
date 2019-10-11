@@ -2,4 +2,5 @@
 target/
 
 # IntelliJ
+*.iml
 .idea/
