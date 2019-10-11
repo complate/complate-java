@@ -37,18 +37,18 @@ class ComplateClasspathSourceTests {
     @Test
     void getInputStream_withNonExistingScript_throwsFileNotFoundException() {
         // arrange
-        ComplateClasspathSource sut = new ComplateClasspathSource("non_existing.js");
+        ComplateClasspathSource sut = new ComplateClasspathSource("/non_existing_bundle.js");
 
         // act + assert
         assertThatThrownBy(() -> sut.getInputStream())
             .isInstanceOf(FileNotFoundException.class)
-            .hasMessage("class path source [non_existing.js] cannot be opened because it does not exist");
+            .hasMessage("class path source [/non_existing_bundle.js] cannot be opened because it does not exist");
     }
 
     @Nested
     class WithExistingScript {
 
-        ComplateClasspathSource sut = new ComplateClasspathSource("/existing_script.js");
+        ComplateClasspathSource sut = new ComplateClasspathSource("/existing_bundle.js");
 
         @Test
         void getDescription_returnsHumanReadableDescription() {
@@ -56,7 +56,7 @@ class ComplateClasspathSourceTests {
             String description = sut.getDescription();
 
             // assert
-            assertThat(description).isEqualTo("class path source [/existing_script.js]");
+            assertThat(description).isEqualTo("class path source [/existing_bundle.js]");
         }
 
         @Test

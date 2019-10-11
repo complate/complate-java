@@ -15,9 +15,11 @@
  */
 package org.complate.nashorn;
 
+import org.complate.core.ComplateException;
 import org.complate.core.ComplateRenderer;
 import org.complate.core.source.ComplateClasspathSource;
 import org.complate.core.stream.ComplateStringStream;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -25,61 +27,109 @@ import java.util.Map;
 
 import static java.util.Collections.emptyMap;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class NashornComplateRendererTests {
 
-    ComplateRenderer sut = new NashornComplateRenderer(
-        new ComplateClasspathSource("/simple_bundle.js"),
-        new HashMap<String, Object>() {{
-            put("constantBinding", "World");
-            put("functionBinding", new FunctionBinding());
-        }});
-
-    ComplateStringStream stream = new ComplateStringStream();
+    @Test
+    void new_sourceWithNonExistingBundle_throwsException() {
+        assertThatThrownBy(() -> new NashornComplateRenderer(new ComplateClasspathSource("/non_existing_bundle.js")))
+            .isInstanceOf(ComplateException.class)
+            .hasMessage("failed to initialize input stream for source 'class path source [/non_existing_bundle.js]'");
+    }
 
     @Test
-    void render_listView_withAllParams_works() {
+    void new_sourceWithInvalidBundle_throwsException() {
+        assertThatThrownBy(() -> new NashornComplateRenderer(new ComplateClasspathSource("/invalid_bundle.js")))
+            .isInstanceOf(ComplateException.class)
+            .hasMessage(
+                "failed to evaluate script: class path source [/invalid_bundle.js]:18:0 Expected eof but found }\n" +
+                "}\n" +
+                "^\n");
+    }
+
+    @Test
+    void render_sourceWithoutRenderFunction_throwsException() {
         // arrange
-        Map<String, String> parameters = new HashMap<>();
-        parameters.put("a", "1");
-        parameters.put("b", "2");
-        parameters.put("c", "3");
+        ComplateRenderer sut = new NashornComplateRenderer(
+            new ComplateClasspathSource("/bundle_without_render_function.js"));
 
-        // act
-        sut.render("list", parameters, stream);
-
-        // assert
-        assertThat(stream.getContent()).isEqualTo("Arguments: 1, 2, 3");
+        // act + assert
+        assertThatThrownBy(() -> sut.render("view", emptyMap(), new ComplateStringStream()))
+            .isInstanceOf(ComplateException.class)
+            .hasMessage("could not find 'render' method in script");
     }
 
     @Test
-    void render_globalView_shouldRenderAvailableGlobalObject() {
-        // act
-        sut.render("global", emptyMap(), stream);
+    void render_sourceWithRuntimeError_throwsException() {
+        // arrange
+        ComplateRenderer sut = new NashornComplateRenderer(
+            new ComplateClasspathSource("/bundle_with_runtime_error.js"));
 
-        // assert
-        assertThat(stream.getContent()).isEqualTo("[object global]");
+        // act + assert
+        assertThatThrownBy(() -> sut.render("view", emptyMap(), new ComplateStringStream()))
+            .isInstanceOf(ComplateException.class)
+            .hasMessage(
+                "failed to render: ReferenceError: \"foo\" is not defined\n" +
+                "\tat render (class path source [/bundle_with_runtime_error.js]:17)");
     }
 
-    @Test
-    void render_consoleView_shouldRenderAvailableConsoleStuff() {
-        // act
-        sut.render("console", emptyMap(), stream);
+    @Nested
+    class WithSimpleBundle {
 
-        // assert
-        assertThat(stream.getContent()).isEqualTo(
-            "[object Object]\n" +
-            "function print() { [native code] }\n" +
-            "function print() { [native code] }");
-    }
+        ComplateRenderer sut = new NashornComplateRenderer(
+            new ComplateClasspathSource("/simple_bundle.js"),
+            new HashMap<String, Object>() {{
+                put("constantBinding", "World");
+                put("functionBinding", new FunctionBinding());
+            }});
 
-    @Test
-    void render_bindingsView_shouldProvideBindingsToView() {
-        // act
-        sut.render("bindings", emptyMap(), stream);
+        ComplateStringStream stream = new ComplateStringStream();
 
-        // assert
-        assertThat(stream.getContent()).isEqualTo("Hello, World!");
+        @Test
+        void render_listView_withAllParams_works() {
+            // arrange
+            Map<String, String> parameters = new HashMap<>();
+            parameters.put("a", "1");
+            parameters.put("b", "2");
+            parameters.put("c", "3");
+
+            // act
+            sut.render("list", parameters, stream);
+
+            // assert
+            assertThat(stream.getContent()).isEqualTo("Arguments: 1, 2, 3");
+        }
+
+        @Test
+        void render_globalView_shouldRenderAvailableGlobalObject() {
+            // act
+            sut.render("global", emptyMap(), stream);
+
+            // assert
+            assertThat(stream.getContent()).isEqualTo("[object global]");
+        }
+
+        @Test
+        void render_consoleView_shouldRenderAvailableConsoleStuff() {
+            // act
+            sut.render("console", emptyMap(), stream);
+
+            // assert
+            assertThat(stream.getContent()).isEqualTo(
+                "[object Object]\n" +
+                    "function print() { [native code] }\n" +
+                    "function print() { [native code] }");
+        }
+
+        @Test
+        void render_bindingsView_shouldProvideBindingsToView() {
+            // act
+            sut.render("bindings", emptyMap(), stream);
+
+            // assert
+            assertThat(stream.getContent()).isEqualTo("Hello, World!");
+        }
     }
 
     public static final class FunctionBinding {

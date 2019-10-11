@@ -232,7 +232,7 @@
               <exclude>LICENSE*</exclude>
               <exclude>bin/**</exclude>
               <exclude>mvnw*</exclude>
-              <exclude>src/test/resources/existing_script.js</exclude>
+              <exclude>src/test/resources/existing_bundle.js</exclude>
             </excludes>
             <failIfUnknown>true</failIfUnknown>
             <header>LICENSE_HEADER</header>
