@@ -208,6 +208,7 @@
               <exclude>.gitattributes</exclude>
               <exclude>.mvn/**</exclude>
               <exclude>LICENSE*</exclude>
+              <exclude>bin/**</exclude>
               <exclude>mvnw*</exclude>
               <exclude>src/test/resources/existing_script.js</exclude>
             </excludes>

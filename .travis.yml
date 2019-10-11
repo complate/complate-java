@@ -8,7 +8,7 @@ jdk:
   - openjdk13
   - openjdk-ea
 script:
-  - ./mvnw --batch-mode --errors clean package
+  - "./bin/cibuild"
 cache:
   directories:
     - "$HOME/.m2"
