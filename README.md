@@ -1,7 +1,7 @@
 # complate-java
 *- Rendering of JSX based views in Java*
 
-[![license](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0) [![Build Status](https://travis-ci.org/complate/complate-java.svg?branch=master)](https://travis-ci.org/complate/complate-java)
+[![license](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0) [![Build Status](https://travis-ci.org/complate/complate-java.svg?branch=master)](https://travis-ci.org/complate/complate-java) [![codecov](https://codecov.io/gh/complate/complate-java/branch/master/graph/badge.svg)](https://codecov.io/gh/complate/complate-java)
 
 [complate](https://complate.org) adapter that can be used in Java projects for
 rendering JSX based views.
