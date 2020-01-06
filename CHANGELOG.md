@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+## [0.1.0] - 2020-01-06
+
 This release contains of the initial code extraction from
 [complate-spring-mvc](https://github.com/complate/complate-spring-mvc).
 
@@ -44,6 +47,7 @@ We'd like to thank all the contributors who worked on this release!
 - [@mvitz][mvitz]
 
 
-[Unreleased]: https://github.com/complate/complate-java/compare/502b0d95d0acf1453ba895ae8930c2140e8c5644...HEAD
+[Unreleased]: https://github.com/complate/complate-java/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/complate/complate-java/compare/502b0d95d0acf1453ba895ae8930c2140e8c5644...v0.1.0
 
 [mvitz]: https://github.com/mvitz
