@@ -22,6 +22,7 @@ import org.complate.core.ComplateException;
 import org.complate.core.ComplateRenderer;
 import org.complate.core.ComplateSource;
 import org.complate.core.ComplateStream;
+import org.complate.graal.GraalComplateRenderer;
 
 import javax.script.Bindings;
 import javax.script.ScriptEngine;
@@ -43,7 +44,10 @@ import static jdk.nashorn.api.scripting.NashornException.getScriptStackString;
  *
  * @author mvitz
  * @since 0.1.0
+ * @deprecated Please migrate to {@link GraalComplateRenderer} because Nashorn
+ *             will be removed from JDK.
  */
+@Deprecated
 public final class NashornComplateRenderer implements ComplateRenderer {
 
     private static final String POLYFILLS =
