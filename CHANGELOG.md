@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+This release contains a new renderer that uses the Graal JavaScript engine.
+
+### 📣 Notes
+- Although we recommend using the new `GraalComplateRenderer` if you plan on
+  using the `NashornComplateRenderer` you should add an exclusion to
+  `org.graalvm.js:js`.
+
+### ⭐️ New Features
+- New `GraalComplateRenderer` ([3d7ea5d](https://github.com/complate/complate-java/commit/3d7ea5d737e93ebaf8d877161e78ec8c66680c4b)).
+
+
+### ❤️ Contributors
+
+We'd like to thank all the contributors who worked on this release!
+
+- [@larsrh][larsrh]
+
 
 ## [0.1.0] - 2020-01-06
 
