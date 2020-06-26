@@ -34,7 +34,10 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class GraalComplateRendererTests {
 
     private ComplateRenderer renderer(ComplateSource source, Map<String, ?> bindings) {
-        return new GraalComplateRenderer(source, bindings);
+        return GraalComplateRenderer
+            .of(source)
+            .withBindings(bindings)
+            .build();
     }
 
     private ComplateRenderer renderer(ComplateSource source) {
