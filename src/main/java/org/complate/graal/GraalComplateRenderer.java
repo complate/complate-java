@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 complate.org
+ * Copyright 2019-2020 complate.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,30 +33,55 @@ import java.io.Reader;
 import java.util.*;
 
 import static java.util.Collections.emptyMap;
-import static org.graalvm.polyglot.HostAccess.ALL;
+import static org.complate.graal.GraalComplateRendererBuilder.DEFAULT_CONTEXT_CUSTOMIZATIONS;
 
 /**
  * {@link Context Graal} based {@link ComplateRenderer}.
+ *
+ * @author mvitz
+ * @author larsrh
+ * @since 0.2.0
  */
 public final class GraalComplateRenderer implements ComplateRenderer {
 
+    private static final String CONTEXT_LANGUAGE = "js";
     private static final String POLYFILLS =
         "if(typeof global === \"undefined\") { var global = this; }\n" +
         "\n";
 
     private final Context context;
 
+    /**
+     * Constructs a new {@link GraalComplateRenderer}.
+     *
+     * @deprecated Will be removed before 0.2.0, please use {@link #of(ComplateSource)}.
+     * @param source the {@link ComplateSource} used to render the views
+     */
+    @Deprecated
     public GraalComplateRenderer(ComplateSource source) {
         this(source, emptyMap());
     }
 
+    /**
+     * Constructs a new {@link GraalComplateRenderer} with some additional bindings.
+     *
+     * @deprecated Will be removed before 0.2.0, please use {@link #of(ComplateSource)} and {@link GraalComplateRendererBuilder#withBindings(Map)}.
+     * @param source the {@link ComplateSource} used to render the views
+     * @param bindings the bindings globally available in the views
+     */
+    @Deprecated
     public GraalComplateRenderer(ComplateSource source, Map<String, ?> bindings) {
-        context = createContext(bindings);
+        this(DEFAULT_CONTEXT_CUSTOMIZATIONS.apply(Context.newBuilder(CONTEXT_LANGUAGE)).build(), source, bindings);
+    }
 
-        context.eval("js", POLYFILLS);
+    private GraalComplateRenderer(Context context, ComplateSource source, Map<String, ?> bindings) {
+        this.context = context;
+
+        context.eval(CONTEXT_LANGUAGE, POLYFILLS);
+        addBindings(bindings);
 
         try (Reader reader = readerFor(source)) {
-            context.eval(Source.newBuilder("js", reader, source.getDescription()).build());
+            context.eval(Source.newBuilder(CONTEXT_LANGUAGE, reader, source.getDescription()).build());
         } catch (IOException e) {
             throw new ComplateException(e, "failed to read script from source '%s'", source.getDescription());
         } catch (PolyglotException e) {
@@ -66,32 +91,31 @@ public final class GraalComplateRenderer implements ComplateRenderer {
 
     @Override
     public void render(String view, Map<String, ?> parameters, ComplateStream stream) throws ComplateException {
-        final Value args = context.getBindings("js");
+        final Value args = context.getBindings(CONTEXT_LANGUAGE);
         args.putMember("view", view);
         args.putMember("params", proxy(parameters));
         args.putMember("stream", stream);
         try {
-            context.eval("js", "render(view, ...params, stream);");
+            context.eval(CONTEXT_LANGUAGE, "render(view, ...params, stream);");
         } catch (PolyglotException e) {
             throw new ComplateException(e, "failed to render: %s", extractJavaScriptError(e));
         }
     }
 
-    private static Context createContext(Map<String, ?> bindings) {
-        final Context context = createContext();
-
-        final Value contextBindings = context.getBindings("js");
-        bindings.forEach(contextBindings::putMember);
-
-        return context;
+    /**
+     * Creates a {@link GraalComplateRendererBuilder} that can be used to create
+     * an instance of this {@link ComplateRenderer}.
+     *
+     * @param source the {@link ComplateSource} used to render the views
+     * @return a new {@link GraalComplateRendererBuilder}
+     */
+    public static GraalComplateRendererBuilder of(ComplateSource source) {
+        return new GraalComplateRendererBuilder(GraalComplateRenderer::new, () -> Context.newBuilder(CONTEXT_LANGUAGE), source);
     }
 
-    private static Context createContext() {
-        return Context.newBuilder("js")
-            .allowHostAccess(ALL)
-            .allowHostClassLookup((s) -> true)
-            .allowExperimentalOptions(true).option("js.experimental-foreign-object-prototype", "true")
-            .build();
+    private void addBindings(Map<String, ?> bindings) {
+        final Value contextBindings = context.getBindings(CONTEXT_LANGUAGE);
+        bindings.forEach(contextBindings::putMember);
     }
 
     private static Reader readerFor(ComplateSource source) {
