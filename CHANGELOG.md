@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### 📣 Notes
+- `NashornComplateRenderer` is removed. Migrate to the `GraalComplateRenderer` ([c5aba0e](https://github.com/complate/complate-java/commit/c5aba0e6f879f346f8ef9a5a6150ba1e493960ec)).
+
+### ❤️ Contributors
+
+We'd like to thank all the contributors who worked on this release!
+
+- [@mvitz][mvitz]
+
 
 ## [0.2.0] - 2020-07-07
 
@@ -70,8 +79,8 @@ We'd like to thank all the contributors who worked on this release!
 
 
 [Unreleased]: https://github.com/complate/complate-java/compare/v0.2.0...HEAD
-[0.1.0]: https://github.com/complate/complate-java/compare/502b0d95d0acf1453ba895ae8930c2140e8c5644...v0.1.0
 [0.2.0]: https://github.com/complate/complate-java/compare/v0.1.0...v0.2.0
+[0.1.0]: https://github.com/complate/complate-java/compare/502b0d95d0acf1453ba895ae8930c2140e8c5644...v0.1.0
 
 [larsrh]: https://github.com/larsrh
 [mvitz]: https://github.com/mvitz
