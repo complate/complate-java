@@ -22,7 +22,7 @@
 
   <groupId>org.complate</groupId>
   <artifactId>complate-core</artifactId>
-  <version>0.2.0</version>
+  <version>0.3.0-SNAPSHOT</version>
 
   <name>complate adapter for Java</name>
   <description>Java adapter for complate</description>
