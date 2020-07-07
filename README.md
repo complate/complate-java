@@ -15,11 +15,11 @@ Download the jar through Maven:
 <dependency>
   <groupId>org.complate</groupId>
   <artifactId>complate-core</artifactId>
-  <version>0.1.0</version>
+  <version>0.2.0</version>
 </dependency>
 ```
 
-If you want to use the latest unstable version `0.2.0-SNAPSHOT` you need to
+If you want to use the latest unstable version `0.3.0-SNAPSHOT` you need to
 configure Sonatype's OSS Nexus as snapshot repository:
 
 ```xml

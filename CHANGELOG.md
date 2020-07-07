@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+## [0.2.0] - 2020-07-07
+
 This release contains a new renderer that uses the Graal JavaScript engine.
 
 ### 📣 Notes
@@ -66,8 +69,9 @@ We'd like to thank all the contributors who worked on this release!
 - [@mvitz][mvitz]
 
 
-[Unreleased]: https://github.com/complate/complate-java/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/complate/complate-java/compare/v0.2.0...HEAD
 [0.1.0]: https://github.com/complate/complate-java/compare/502b0d95d0acf1453ba895ae8930c2140e8c5644...v0.1.0
+[0.2.0]: https://github.com/complate/complate-java/compare/v0.1.0...v0.2.0
 
-[mvitz]: https://github.com/mvitz
 [larsrh]: https://github.com/larsrh
+[mvitz]: https://github.com/mvitz
