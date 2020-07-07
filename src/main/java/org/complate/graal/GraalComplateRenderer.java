@@ -51,29 +51,6 @@ public final class GraalComplateRenderer implements ComplateRenderer {
 
     private final Context context;
 
-    /**
-     * Constructs a new {@link GraalComplateRenderer}.
-     *
-     * @deprecated Will be removed before 0.2.0, please use {@link #of(ComplateSource)}.
-     * @param source the {@link ComplateSource} used to render the views
-     */
-    @Deprecated
-    public GraalComplateRenderer(ComplateSource source) {
-        this(source, emptyMap());
-    }
-
-    /**
-     * Constructs a new {@link GraalComplateRenderer} with some additional bindings.
-     *
-     * @deprecated Will be removed before 0.2.0, please use {@link #of(ComplateSource)} and {@link GraalComplateRendererBuilder#withBindings(Map)}.
-     * @param source the {@link ComplateSource} used to render the views
-     * @param bindings the bindings globally available in the views
-     */
-    @Deprecated
-    public GraalComplateRenderer(ComplateSource source, Map<String, ?> bindings) {
-        this(DEFAULT_CONTEXT_CUSTOMIZATIONS.apply(Context.newBuilder(CONTEXT_LANGUAGE)).build(), source, bindings);
-    }
-
     private GraalComplateRenderer(Context context, ComplateSource source, Map<String, ?> bindings) {
         this.context = context;
 
