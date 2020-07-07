@@ -151,6 +151,7 @@ public final class GraalComplateRendererBuilder {
      *
      * @deprecated Please use {@link #withContextCustomizations(UnaryOperator)}.
      */
+    @Deprecated
     public GraalComplateRendererBuilder withAdditionalContextCustomizations(Function<Context.Builder, Context.Builder> additionalContextCustomizations) {
         return withAdditionalContextCustomizations(additionalContextCustomizations::apply);
     }
