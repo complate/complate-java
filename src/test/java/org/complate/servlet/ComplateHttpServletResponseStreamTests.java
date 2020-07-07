@@ -27,7 +27,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.only;
 import static org.mockito.Mockito.verify;
 
-public class ComplateHttpServletResponseStreamTests {
+class ComplateHttpServletResponseStreamTests {
 
     HttpServletResponse response = mock(HttpServletResponse.class);
     PrintWriter writer = mock(PrintWriter.class);

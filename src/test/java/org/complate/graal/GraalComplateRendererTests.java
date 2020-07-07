@@ -1,12 +1,12 @@
 /**
  * Copyright 2019 complate.org
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,6 +15,9 @@
  */
 package org.complate.graal;
 
+import org.assertj.core.api.AbstractThrowableAssert;
+import org.assertj.core.api.ThrowableAssert;
+import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.complate.core.ComplateException;
 import org.complate.core.ComplateRenderer;
 import org.complate.core.ComplateSource;
@@ -46,14 +49,28 @@ class GraalComplateRendererTests {
 
     @Test
     void new_sourceWithNonExistingBundle_throwsException() {
-        assertThatThrownBy(() -> renderer(new ComplateClasspathSource("/non_existing_bundle.js")))
+        // given
+        ComplateClasspathSource source = new ComplateClasspathSource("/non_existing_bundle.js");
+
+        // when
+        ThrowingCallable createRenderer = () -> renderer(source);
+
+        // then
+        assertThatThrownBy(createRenderer)
             .isInstanceOf(ComplateException.class)
             .hasMessage("failed to initialize input stream for source 'class path source [/non_existing_bundle.js]'");
     }
 
     @Test
     void new_sourceWithInvalidBundle_throwsException() {
-        assertThatThrownBy(() -> renderer(new ComplateClasspathSource("/invalid_bundle.js")))
+        // given
+        ComplateClasspathSource source = new ComplateClasspathSource("/invalid_bundle.js");
+
+        // when
+        ThrowingCallable createRenderer = () -> renderer(source);
+
+        // then
+        assertThatThrownBy(createRenderer)
             .isInstanceOf(ComplateException.class)
             .hasMessageContaining("failed to evaluate script")
             .hasMessageContaining("SyntaxError")
@@ -63,12 +80,15 @@ class GraalComplateRendererTests {
 
     @Test
     void render_sourceWithoutRenderFunction_throwsException() {
-        // arrange
+        // given
         ComplateRenderer sut = renderer(
             new ComplateClasspathSource("/bundle_without_render_function.js"));
 
-        // act + assert
-        assertThatThrownBy(() -> sut.render("view", emptyMap(), new ComplateStringStream()))
+        // when
+        ThrowingCallable render = () -> sut.render("view", emptyMap(), new ComplateStringStream());
+
+        // then
+        assertThatThrownBy(render)
             .isInstanceOf(ComplateException.class)
             .hasMessageContaining("ReferenceError")
             .hasMessageContaining("render is not defined");
@@ -76,12 +96,15 @@ class GraalComplateRendererTests {
 
     @Test
     void render_sourceWithRuntimeError_throwsException() {
-        // arrange
+        // given
         ComplateRenderer sut = renderer(
             new ComplateClasspathSource("/bundle_with_runtime_error.js"));
 
+        // when
+        ThrowingCallable render = () -> sut.render("view", emptyMap(), new ComplateStringStream());
+
         // act + assert
-        assertThatThrownBy(() -> sut.render("view", emptyMap(), new ComplateStringStream()))
+        assertThatThrownBy(render)
             .isInstanceOf(ComplateException.class)
             .hasMessageContaining("ReferenceError")
             .hasMessageContaining("foo is not defined");

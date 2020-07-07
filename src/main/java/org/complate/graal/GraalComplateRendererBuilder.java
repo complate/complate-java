@@ -24,6 +24,7 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.function.UnaryOperator;
 
 import static org.graalvm.polyglot.HostAccess.ALL;
 
@@ -51,10 +52,10 @@ public final class GraalComplateRendererBuilder {
      * <p>
      * If you want to extends these defaults please use {@link #withAdditionalContextCustomizations(Function)}.
      */
-    public static final Function<Context.Builder, Context.Builder> DEFAULT_CONTEXT_CUSTOMIZATIONS =
+    public static final UnaryOperator<Context.Builder> DEFAULT_CONTEXT_CUSTOMIZATIONS =
         builder -> builder
             .allowHostAccess(ALL)
-            .allowHostClassLookup((s) -> true)
+            .allowHostClassLookup(s -> true)
             .allowExperimentalOptions(true)
             .option("js.experimental-foreign-object-prototype", "true");
 
@@ -110,8 +111,30 @@ public final class GraalComplateRendererBuilder {
      * @param contextCustomizations the customizations used on creation
      * @return an {@link GraalComplateRendererBuilder} instance with all previous
      * state and this customizations
+     *
+     * @deprecated Please use {@link #withContextCustomizations(UnaryOperator)}.
      */
+    @Deprecated
     public GraalComplateRendererBuilder withContextCustomizations(Function<Context.Builder, Context.Builder> contextCustomizations) {
+        return withContextCustomizations(contextCustomizations::apply);
+    }
+
+    /**
+     * The internally used {@link Context} can be customized within the given
+     * {@link Function} before being created. This is useful if you have special
+     * needs (e.g. require nashorn compatibility) or want to allow more access.
+     * <p>
+     * <strong>Note:</strong> The {@link #DEFAULT_CONTEXT_CUSTOMIZATIONS} is
+     * deactivated when using this method. If you want to only extend these
+     * defaults you can use {@link #withAdditionalContextCustomizations(Function)}.
+     *
+     * @param contextCustomizations the customizations used on creation
+     * @return an {@link GraalComplateRendererBuilder} instance with all previous
+     * state and this customizations
+     *
+     * @since 0.3.0
+     */
+    public GraalComplateRendererBuilder withContextCustomizations(UnaryOperator<Context.Builder> contextCustomizations) {
         this.contextCustomizations = contextCustomizations;
         return this;
     }
@@ -125,8 +148,26 @@ public final class GraalComplateRendererBuilder {
      * @param additionalContextCustomizations the additional customizations used on creation
      * @return an {@link GraalComplateRendererBuilder} instance with all previous
      * state and this customizations added on top
+     *
+     * @deprecated Please use {@link #withContextCustomizations(UnaryOperator)}.
      */
     public GraalComplateRendererBuilder withAdditionalContextCustomizations(Function<Context.Builder, Context.Builder> additionalContextCustomizations) {
+        return withAdditionalContextCustomizations(additionalContextCustomizations::apply);
+    }
+
+    /**
+     * The internally use {@link Context} can be customized within the given
+     * {@link Function} before being created. The given additional customizations
+     * are applied on top of the {@link #DEFAULT_CONTEXT_CUSTOMIZATIONS}. If you
+     * don't want these to be applied please use {@link #withContextCustomizations(Function)}.
+     *
+     * @param additionalContextCustomizations the additional customizations used on creation
+     * @return an {@link GraalComplateRendererBuilder} instance with all previous
+     * state and this customizations added on top
+     *
+     * @since 0.3.0
+     */
+    public GraalComplateRendererBuilder withAdditionalContextCustomizations(UnaryOperator<Context.Builder> additionalContextCustomizations) {
         contextCustomizations = contextCustomizations.andThen(additionalContextCustomizations);
         return this;
     }
