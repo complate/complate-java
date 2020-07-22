@@ -35,6 +35,9 @@ configure Sonatype's OSS Nexus as snapshot repository:
 
 See [CHANGELOG.md](./CHANGELOG.md)
 
+## Frequently Asked Questions
+
+See [FAQ.md](./FAQ.md)
 
 ## Code of Conduct
 
