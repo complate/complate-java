@@ -27,6 +27,9 @@ This release contains a new renderer that uses the Graal JavaScript engine.
   `org.graalvm.js:js`.
 - `NashornComplateRenderer` is deprecated and will be removed in the near
   future. Please migrate to the new `GraalComplateRenderer` ([592d7e3](https://github.com/complate/complate-java/commit/592d7e342dc9e5b4a85e61c2604675ddd40f2e93)).
+- `GraalComplateRenderer` is not a drop-in replacement for `NashornComplateRenderer` -
+  see the
+  [FAQ](./FAQ.md#can-i-replace-nashorncomplaterenderer-with-graalcomplaterenderer).
 
 ### ⭐️ New Features
 - New `GraalComplateRenderer` ([3d7ea5d](https://github.com/complate/complate-java/commit/3d7ea5d737e93ebaf8d877161e78ec8c66680c4b)).
