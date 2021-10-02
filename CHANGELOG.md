@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### 📣 Notes
 - `NashornComplateRenderer` is removed. Migrate to the `GraalComplateRenderer` ([c5aba0e](https://github.com/complate/complate-java/commit/c5aba0e6f879f346f8ef9a5a6150ba1e493960ec)).
 
+### 🔨 Dependency Upgrades
+- Upgrade to Graal 21.2.0
+
 ### ❤️ Contributors
 
 We'd like to thank all the contributors who worked on this release!

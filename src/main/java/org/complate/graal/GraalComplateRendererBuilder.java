@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 complate.org
+ * Copyright 2020-2021 complate.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,6 +48,7 @@ public final class GraalComplateRendererBuilder {
      *   <li>Call {@link Context.Builder#allowHostClassLookup(Predicate)} with a {@link Predicate} that always returns {@code true}.</li>
      *   <li>Call {@link Context.Builder#allowExperimentalOptions(boolean)} with {@code true}.</li>
      *   <li>Call {@link Context.Builder#option(String, String)} with {@code "js.experimental-foreign-object-prototype"} and {@code "true"}.</li>
+     *   <li>Call {@link Context.Builder#option(String, String)} with {@code "engine.WarnInterpreterOnly"} and {@code "false"}.</li>
      * </ol>
      * <p>
      * If you want to extends these defaults please use {@link #withAdditionalContextCustomizations(Function)}.
@@ -57,7 +58,8 @@ public final class GraalComplateRendererBuilder {
             .allowHostAccess(ALL)
             .allowHostClassLookup(s -> true)
             .allowExperimentalOptions(true)
-            .option("js.experimental-foreign-object-prototype", "true");
+            .option("js.experimental-foreign-object-prototype", "true")
+            .option("engine.WarnInterpreterOnly", "false");
 
     private final GraalComplateRendererFactory factory;
     private final Supplier<Context.Builder> contextBuilderFactory;
