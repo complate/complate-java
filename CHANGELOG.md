@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+## [0.3.0] - 2022-09-23
+
+This release updates Nashorn to the open source
+[`org.openjdk.nashorn`](https://github.com/szegedi/nashorn) branch and splits
+the project into three separate modules:
+
+- `complate-core` contains the API relevant classes and interfaces and some
+  utilities.
+- `complate-graal` contains the GraalVM based implementation.
+- `complate-nashorn` contains the Nashorn based implementation.
+
+If you update from a previous release note that you need to change your
+dependency to one of the modules that contain your desired implementation!
+
 ### 📣 Notes
 - `NashornComplateRenderer` has been updated to use the open source
   [`org.openjdk.nashorn`](https://github.com/szegedi/nashorn) branch of Nashorn
@@ -21,6 +36,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 We'd like to thank all the contributors who worked on this release!
 
+- [@joyheron][joyheron]
 - [@mvitz][mvitz]
 
 
@@ -45,6 +61,7 @@ This release contains a new renderer that uses the Graal JavaScript engine.
 
 We'd like to thank all the contributors who worked on this release!
 
+- [@bodewig][bodewig]
 - [@larsrh][larsrh]
 - [@mvitz][mvitz]
 
@@ -88,9 +105,12 @@ We'd like to thank all the contributors who worked on this release!
 - [@mvitz][mvitz]
 
 
-[Unreleased]: https://github.com/complate/complate-java/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/complate/complate-java/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/complate/complate-java/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/complate/complate-java/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/complate/complate-java/compare/502b0d95d0acf1453ba895ae8930c2140e8c5644...v0.1.0
 
+[bodewig]: https://github.com/bodewig
+[joyheron]: https://github.com/joyheron
 [larsrh]: https://github.com/larsrh
 [mvitz]: https://github.com/mvitz
