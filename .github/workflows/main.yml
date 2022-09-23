@@ -18,14 +18,6 @@ jobs:
           cache: maven
 
       - name: Compile, test, and package modules
-        run: \
-          MAVEN_OPTS="-Dorg.slf4j.simpleLogger.showDateTime=true"
-          MAVEN_OPTS="-Djava.awt.headless=true ${MAVEN_OPTS}"
-          export MAVEN_OPTS
-          ./mvnw \
-            --batch-mode \
-            --errors \
-            --fail-at-end \
-            --no-transfer-progress \
-            --show-version \
-            verify
+        env:
+          MAVEN_OPTS="-Dorg.slf4j.simpleLogger.showDateTime=true -Djava.wat.headless=true"
+        run: ./mvnw --batch-mode --errors --fail-at-end --no-transfer-progress --show-version verify
