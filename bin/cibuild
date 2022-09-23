@@ -37,7 +37,6 @@ build_pr() {
 
 build_main() {
   mvn clean verify
-  bash <(curl -s https://codecov.io/bash)
 }
 
 build_branch() {

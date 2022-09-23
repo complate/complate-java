@@ -5,7 +5,6 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 [![Open Issues](https://img.shields.io/github/issues/complate/complate-java.svg)](https://github.com/complate/complate-java/issues)
 [![Build Status](https://travis-ci.org/complate/complate-java.svg?branch=main)](https://travis-ci.org/complate/complate-java)
-[![Code Coverage](https://codecov.io/gh/complate/complate-java/branch/main/graph/badge.svg)](https://codecov.io/gh/complate/complate-java)
 
 [complate](https://complate.org) adapter that can be used in Java projects for
 rendering JSX based views.
