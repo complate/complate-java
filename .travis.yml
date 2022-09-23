@@ -10,8 +10,3 @@ cache:
   directories:
     - "$HOME/.m2"
     - "$HOME/.sonar/cache"
-addons:
-  sonarcloud:
-    organization: "complate"
-    token:
-      secure: "oA2jzShS32wFK/8n2YN98B+XAa5+Y7t8dXrleEIxyFRaP4muNWuqrgLAMEOpmkOKFskXrelBGBvEi2vD91LPLpZAhXTDz1b9LI9OAiCo7lPAAQ5UP1CBn3N7VR0fRxtNyjYLvOepwhh9VbFuh5fDmOmxFQptT98oDns/TFrqTUPV6kuyACvjn4aG/0fpxtFNW1RwFGh7ChtXuX70dAz7DqvdFgX0iAt6lcUlh278LM0vDfa997P/rSQ+lee7Z3B6PQ1lUH3a5J3HldTaGTl8pYaSX9JeOsw30bq0JPs/z8VmHh0aL92l/1D0l1xfrVNDL1RzzTv+7pvu7mX+V8L121na39YTdGz3SRmOSgZgMAQgaNOFF4kNjn1bRtyYjPZo5D20LQc8XI77Z0n8FUK0x+ioktCHd5ZC8hA6kJhcoV3y/9g/8+/Ll+CJhLibtH9iTkx301GiWiujZnrb12O5BQj6eWl8tUykXqi7Ywm+zsJG/EC80I2rQ7x6mUZxmvPHpFWqeWwoGQW3kFUzpwE2C3gWxqGm8S+4eylV8zSlqm9Qn0g4d727xBEp5VTikSCDPdWLDESoPoxDQKq/9eXO402aS9u1mL/9fU3FN8vV08DoFtKV9b/jLM8zHa4d3SGe92KZiFhA2rY/NRrdFTtM6iL3+opAHQWFRcDtC32ygbo="
