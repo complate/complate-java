@@ -23,7 +23,7 @@
   <parent>
     <groupId>org.complate</groupId>
     <artifactId>complate-parent</artifactId>
-    <version>0.3.0</version>
+    <version>0.4.0-SNAPSHOT</version>
   </parent>
 
   <artifactId>complate-nashorn</artifactId>
