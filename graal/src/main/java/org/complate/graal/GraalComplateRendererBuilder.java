@@ -47,7 +47,7 @@ public final class GraalComplateRendererBuilder {
      *   <li>Call {@link Context.Builder#allowHostAccess(HostAccess)} with {@link HostAccess#ALL}.</li>
      *   <li>Call {@link Context.Builder#allowHostClassLookup(Predicate)} with a {@link Predicate} that always returns {@code true}.</li>
      *   <li>Call {@link Context.Builder#allowExperimentalOptions(boolean)} with {@code true}.</li>
-     *   <li>Call {@link Context.Builder#option(String, String)} with {@code "js.experimental-foreign-object-prototype"} and {@code "true"}.</li>
+     *   <li>Call {@link Context.Builder#option(String, String)} with {@code "js.foreign-object-prototype"} and {@code "true"}.</li>
      *   <li>Call {@link Context.Builder#option(String, String)} with {@code "engine.WarnInterpreterOnly"} and {@code "false"}.</li>
      * </ol>
      * <p>
@@ -58,7 +58,7 @@ public final class GraalComplateRendererBuilder {
             .allowHostAccess(ALL)
             .allowHostClassLookup(s -> true)
             .allowExperimentalOptions(true)
-            .option("js.experimental-foreign-object-prototype", "true")
+            .option("js.foreign-object-prototype", "true")
             .option("engine.WarnInterpreterOnly", "false");
 
     private final GraalComplateRendererFactory factory;

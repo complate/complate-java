@@ -11,9 +11,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `NashornComplateRenderer` has been updated to use the open source
   [`org.openjdk.nashorn`](https://github.com/szegedi/nashorn) branch of Nashorn
   since Nashorn has been removed from newer JDK versions
+- The project is split into three modules `complate-core`, `complate-nashorn`,
+  and `complate-graal`.
 
 ### 🔨 Dependency Upgrades
-- Upgrade to Graal 21.2.0
+- Upgrade to Graal 22.2.0
 
 ### ❤️ Contributors
 

@@ -14,12 +14,22 @@ Download the jar through Maven:
 ```xml
 <dependency>
   <groupId>org.complate</groupId>
-  <artifactId>complate-core</artifactId>
-  <version>0.2.0</version>
+  <artifactId>complate-nashorn</artifactId>
+  <version>0.3.0</version>
 </dependency>
 ```
 
-If you want to use the latest unstable version `0.3.0-SNAPSHOT` you need to
+or
+
+```xml
+<dependency>
+  <groupId>org.complate</groupId>
+  <artifactId>complate-graal</artifactId>
+  <version>0.3.0</version>
+</dependency>
+```
+
+If you want to use the latest unstable version `0.4.0-SNAPSHOT` you need to
 configure Sonatype's OSS Nexus as snapshot repository:
 
 ```xml
