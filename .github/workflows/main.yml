@@ -1,0 +1,40 @@
+name: Build
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Compile, test, and package modules
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Download JDK
+        id: downloadJdk
+        uses: oracle-actions/setup-java@v1
+        with:
+          website: jdk.java.net
+          release: 11
+          install: false # Suppress automatic delegation to `actions/setup-java`
+
+      - name: Install JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: ${{ steps.downloadJdk.outputs.version }}
+          distribution: jdkfile
+          jdkFile: ${{ steps.downloadJdk.outputs.archive }}
+          cache: maven
+
+      - name: Compile, test, and package modules
+        run: \
+          MAVEN_OPTS="-Dorg.slf4j.simpleLogger.showDateTime=true"
+          MAVEN_OPTS="-Djava.awt.headless=true ${MAVEN_OPTS}"
+          export MAVEN_OPTS
+          ./mvnw \
+            --batch-mode \
+            --errors \
+            --fail-at-end \
+            --no-transfer-progress \
+            --show-version \
+            verify

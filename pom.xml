@@ -43,8 +43,8 @@
   </organization>
 
   <ciManagement>
-    <url>https://travis-ci.org/complate/complate-java</url>
-    <system>Travis CI</system>
+    <url>https://github.com/complate/complate-java/actions</url>
+    <system>GitHub Actions</system>
   </ciManagement>
 
   <issueManagement>
