@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    Copyright 2019-2021 complate.org
+    Copyright 2019-2022 complate.org
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -79,6 +79,7 @@
     <connection>scm:git:https://github.com/complate/complate-java</connection>
     <developerConnection>scm:git:git@github.com:complate/complate-java.git</developerConnection>
     <url>https://github.com/complate/complate-java</url>
+    <tag>head</tag>
   </scm>
 
   <distributionManagement>

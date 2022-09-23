@@ -26,8 +26,8 @@
     <version>0.3.0-SNAPSHOT</version>
   </parent>
 
-  <groupId>org.complate</groupId>
   <artifactId>complate-graal</artifactId>
+  <description>GraalVM based complate implementation</description>
 
   <dependencyManagement>
     <dependencies>

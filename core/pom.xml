@@ -27,6 +27,7 @@
   </parent>
 
   <artifactId>complate-core</artifactId>
+  <description>Core interfaces and utilities for complate</description>
 
   <dependencyManagement>
     <dependencies>
