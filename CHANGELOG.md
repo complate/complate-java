@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### 📣 Notes
+- requireJavaVersion is now >=17
+
+### 🔨 Dependency Upgrades
+- Upgrade to servlet version 6.0.0
+
+### ❤️ Contributors
+We'd like to thank all the contributors who worked on this release!
+
+- [@cj-innoq][cj-innoq]
 
 ## [0.3.0] - 2022-09-23
 

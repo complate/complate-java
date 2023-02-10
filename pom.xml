@@ -161,7 +161,7 @@
                   <enforcers>POM_SECTION_ORDER,MODULE_ORDER,DEPENDENCY_MANAGEMENT_ORDER,DEPENDENCY_ORDER,DEPENDENCY_CONFIGURATION,DEPENDENCY_SCOPE,PLUGIN_MANAGEMENT_ORDER,PLUGIN_CONFIGURATION</enforcers>
                 </compound>
                 <requireJavaVersion>
-                  <version>[11,12)</version>
+                  <version>[17,)</version>
                 </requireJavaVersion>
                 <requireMavenVersion>
                   <version>3.8</version>

@@ -18,7 +18,7 @@ package org.complate.servlet;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 
 import static org.complate.servlet.ComplateHttpServletResponseStream.fromResponse;
