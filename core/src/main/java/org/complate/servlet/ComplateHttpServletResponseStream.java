@@ -19,7 +19,7 @@ import org.complate.core.ComplateStream;
 import org.complate.core.stream.ComplateDelegatingStream;
 import org.complate.core.stream.ComplatePrintWriterStream;
 
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import static java.util.Objects.requireNonNull;
