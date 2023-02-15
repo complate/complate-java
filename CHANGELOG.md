@@ -8,15 +8,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### 📣 Notes
-- requireJavaVersion is now >=17
+- Because of Servlet API upgrade the JDK baseline is now JDK 11
+- Because of the Servlet API namespace change to jakarta you may need to
+  update/change some of your dependencies when updating complate-java.
 
 ### 🔨 Dependency Upgrades
-- Upgrade to servlet version 6.0.0
+- Upgrade Servlet API to jakarta namespace and update to version 6
 
 ### ❤️ Contributors
+
 We'd like to thank all the contributors who worked on this release!
 
 - [@cj-innoq][cj-innoq]
+- [@mvitz][mvitz]
+
 
 ## [0.3.0] - 2022-09-23
 
@@ -121,6 +126,7 @@ We'd like to thank all the contributors who worked on this release!
 [0.1.0]: https://github.com/complate/complate-java/compare/502b0d95d0acf1453ba895ae8930c2140e8c5644...v0.1.0
 
 [bodewig]: https://github.com/bodewig
+[cj-innoq]: https://github.com/cj-innoq
 [joyheron]: https://github.com/joyheron
 [larsrh]: https://github.com/larsrh
 [mvitz]: https://github.com/mvitz
