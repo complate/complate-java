@@ -21,7 +21,7 @@
 
   <groupId>org.complate</groupId>
   <artifactId>complate-parent</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>complate adapter for Java</name>
@@ -78,7 +78,7 @@
     <connection>scm:git:https://github.com/complate/complate-java</connection>
     <developerConnection>scm:git:git@github.com:complate/complate-java.git</developerConnection>
     <url>https://github.com/complate/complate-java</url>
-    <tag>v1.0.0</tag>
+    <tag>head</tag>
   </scm>
 
   <distributionManagement>
@@ -103,7 +103,7 @@
     <maven.compiler.release>11</maven.compiler.release>
     <maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
     <maven.compiler.showWarnings>true</maven.compiler.showWarnings>
-    <project.build.outputTimestamp>2023-02-15T09:25:06Z</project.build.outputTimestamp>
+    <project.build.outputTimestamp>2023-02-15T09:25:19Z</project.build.outputTimestamp>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
