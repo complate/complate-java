@@ -252,6 +252,21 @@
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>3.0.0-M7</version>
+          <configuration>
+            <addSchema>false</addSchema>
+            <goals>deploy</goals>
+            <pushChanges>false</pushChanges>
+            <releaseProfiles>release</releaseProfiles>
+            <scmReleaseCommitComment>Release @{releaseLabel}</scmReleaseCommitComment>
+            <signTag>true</signTag>
+            <tagNameFormat>v@{project.version}</tagNameFormat>
+            <useReleaseProfile>false</useReleaseProfile>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-resources-plugin</artifactId>
           <version>3.3.0</version>
         </plugin>
@@ -288,6 +303,11 @@
               </goals>
             </execution>
           </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.sonatype.plugins</groupId>
+          <artifactId>nexus-staging-maven-plugin</artifactId>
+          <version>1.6.13</version>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -358,6 +378,16 @@
                 </goals>
               </execution>
             </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.sonatype.plugins</groupId>
+            <artifactId>nexus-staging-maven-plugin</artifactId>
+            <extensions>true</extensions>
+            <configuration>
+              <autoReleaseAfterClose>false</autoReleaseAfterClose>
+              <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+              <serverId>ossrh</serverId>
+            </configuration>
           </plugin>
         </plugins>
       </build>
