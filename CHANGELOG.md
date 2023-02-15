@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+## [1.0.0] - 2023-02-15
+
+This release upgrades Servlet API to version 6. Because this version includes
+the namespace change to jakarta and requires a JDK baseline of JDK 11 you may
+need to update other libraries, too.
+
 ### 📣 Notes
 - Because of Servlet API upgrade the JDK baseline is now JDK 11
 - Because of the Servlet API namespace change to jakarta you may need to
@@ -120,7 +127,8 @@ We'd like to thank all the contributors who worked on this release!
 - [@mvitz][mvitz]
 
 
-[Unreleased]: https://github.com/complate/complate-java/compare/v0.3.0...HEAD
+[Unreleased]: https://github.com/complate/complate-java/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/complate/complate-java/compare/v0.3.0...v1.0.0
 [0.3.0]: https://github.com/complate/complate-java/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/complate/complate-java/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/complate/complate-java/compare/502b0d95d0acf1453ba895ae8930c2140e8c5644...v0.1.0

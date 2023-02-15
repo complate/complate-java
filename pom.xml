@@ -16,13 +16,12 @@
     limitations under the License.
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.complate</groupId>
   <artifactId>complate-parent</artifactId>
-  <version>0.4.0-SNAPSHOT</version>
+  <version>1.0.0</version>
   <packaging>pom</packaging>
 
   <name>complate adapter for Java</name>
@@ -79,7 +78,7 @@
     <connection>scm:git:https://github.com/complate/complate-java</connection>
     <developerConnection>scm:git:git@github.com:complate/complate-java.git</developerConnection>
     <url>https://github.com/complate/complate-java</url>
-    <tag>head</tag>
+    <tag>v1.0.0</tag>
   </scm>
 
   <distributionManagement>
@@ -104,7 +103,7 @@
     <maven.compiler.release>11</maven.compiler.release>
     <maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
     <maven.compiler.showWarnings>true</maven.compiler.showWarnings>
-    <project.build.outputTimestamp>2022-09-23T12:20:27Z</project.build.outputTimestamp>
+    <project.build.outputTimestamp>2023-02-15T09:25:06Z</project.build.outputTimestamp>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
