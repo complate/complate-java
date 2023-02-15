@@ -150,15 +150,17 @@
         <artifactId>maven-enforcer-plugin</artifactId>
         <executions>
           <execution>
-            <id>enforce</id>
+            <id>common</id>
             <goals>
               <goal>enforce</goal>
             </goals>
             <configuration>
               <rules>
-                <dependencyConvergence/>
+                <banDependencyManagementScope />
+                <banDuplicatePomDependencyVersions />
+                <dependencyConvergence />
                 <compound implementation="com.github.ferstl.maven.pomenforcers.CompoundPedanticEnforcer">
-                  <enforcers>POM_SECTION_ORDER,MODULE_ORDER,DEPENDENCY_MANAGEMENT_ORDER,DEPENDENCY_ORDER,DEPENDENCY_CONFIGURATION,DEPENDENCY_SCOPE,PLUGIN_MANAGEMENT_ORDER,PLUGIN_CONFIGURATION</enforcers>
+                  <enforcers>POM_SECTION_ORDER,MODULE_ORDER,DEPENDENCY_MANAGEMENT_ORDER,DEPENDENCY_ORDER,DEPENDENCY_CONFIGURATION,DEPENDENCY_ELEMENT,DEPENDENCY_SCOPE,PLUGIN_MANAGEMENT_ORDER,PLUGIN_CONFIGURATION,PLUGIN_ELEMENT</enforcers>
                 </compound>
                 <requireJavaVersion>
                   <version>[11,12)</version>
@@ -166,12 +168,15 @@
                 <requireMavenVersion>
                   <version>[3.8,3.9)</version>
                 </requireMavenVersion>
-                <requireNoRepositories/>
-                <requirePluginVersions/>
-                <!--<requireReleaseDeps/>-->
-                <requireUpperBoundDeps/>
+                <requireNoRepositories />
+                <requirePluginVersions />
+                <requireProfileIdsExist />
+                <requireUpperBoundDeps>
+                  <excludes>
+                    <exclude>net.bytebuddy:byte-buddy</exclude>
+                  </excludes>
+                </requireUpperBoundDeps>
               </rules>
-              <fail>true</fail>
             </configuration>
           </execution>
         </executions>
@@ -216,7 +221,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-enforcer-plugin</artifactId>
-          <version>3.1.0</version>
+          <version>3.2.1</version>
           <dependencies>
             <dependency>
               <groupId>com.github.ferstl</groupId>
