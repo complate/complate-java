@@ -19,7 +19,7 @@ Download the jar through Maven:
 <dependency>
   <groupId>org.complate</groupId>
   <artifactId>complate-nashorn</artifactId>
-  <version>0.3.0</version>
+  <version>1.0.0</version>
 </dependency>
 ```
 
@@ -29,11 +29,11 @@ or
 <dependency>
   <groupId>org.complate</groupId>
   <artifactId>complate-graal</artifactId>
-  <version>0.3.0</version>
+  <version>1.0.0</version>
 </dependency>
 ```
 
-If you want to use the latest unstable version `0.4.0-SNAPSHOT` you need to
+If you want to use the latest unstable version `1.0.1-SNAPSHOT` you need to
 configure Sonatype's OSS Nexus as snapshot repository:
 
 ```xml
