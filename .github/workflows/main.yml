@@ -23,7 +23,7 @@ jobs:
         run: ./mvnw --batch-mode --errors --fail-at-end --no-transfer-progress --show-version verify
 
       - name: Generate coverage report
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         with:
           file: ./**/target/site/jacoco/jacoco.xml
           name: codecov
