@@ -1,7 +1,7 @@
 # complate-java
 *- Rendering of JSX based views in Java*
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.complate/complate-core/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.complate/complate-core)
+[![Maven Central](https://maven-badges.sml.io/maven-central/org.complate/complate-core/badge.svg)](https://maven-badges.sml.io/maven-central/org.complate/complate-core)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 [![Open Issues](https://img.shields.io/github/issues/complate/complate-java.svg)](https://github.com/complate/complate-java/issues)
 [![Build Status](https://github.com/complate/complate-java/actions/workflows/main.yml/badge.svg)](https://github.com/complate/complate-java/actions/workflows/main.yml)
