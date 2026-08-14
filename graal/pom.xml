@@ -22,18 +22,29 @@
   <parent>
     <groupId>org.complate</groupId>
     <artifactId>complate-parent</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.1.0</version>
   </parent>
 
   <artifactId>complate-graal</artifactId>
   <description>GraalVM based complate implementation</description>
 
+  <properties>
+    <graaljs.version>25.0.2</graaljs.version>
+  </properties>
+
   <dependencyManagement>
     <dependencies>
+      <!-- "org.graalvm.polyglott" instead of "org.graalvm.js" is the preferred way: https://www.graalvm.org/jdk25/reference-manual/js/ -->
       <dependency>
-        <groupId>org.graalvm.js</groupId>
+        <groupId>org.graalvm.polyglot</groupId>
         <artifactId>js</artifactId>
-        <version>22.3.2</version>
+        <version>${graaljs.version}</version>
+        <type>pom</type>
+      </dependency>
+      <dependency>
+        <groupId>org.graalvm.polyglot</groupId>
+        <artifactId>polyglot</artifactId>
+        <version>${graaljs.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -43,9 +54,15 @@
       <groupId>org.complate</groupId>
       <artifactId>complate-core</artifactId>
     </dependency>
+
     <dependency>
-      <groupId>org.graalvm.js</groupId>
+      <groupId>org.graalvm.polyglot</groupId>
       <artifactId>js</artifactId>
+      <type>pom</type>
+    </dependency>
+    <dependency>
+      <groupId>org.graalvm.polyglot</groupId>
+      <artifactId>polyglot</artifactId>
     </dependency>
 
     <dependency>
