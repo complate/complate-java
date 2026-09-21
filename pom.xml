@@ -89,7 +89,7 @@
 
   <properties>
     <maven.compiler.failOnWarning>true</maven.compiler.failOnWarning>
-    <maven.compiler.release>11</maven.compiler.release>
+    <maven.compiler.release>17</maven.compiler.release>
     <maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
     <maven.compiler.showWarnings>true</maven.compiler.showWarnings>
     <project.build.outputTimestamp>2023-02-15T09:25:19Z</project.build.outputTimestamp>
@@ -151,7 +151,7 @@
                   <enforcers>POM_SECTION_ORDER,MODULE_ORDER,DEPENDENCY_MANAGEMENT_ORDER,DEPENDENCY_ORDER,DEPENDENCY_CONFIGURATION,DEPENDENCY_ELEMENT,DEPENDENCY_SCOPE,PLUGIN_MANAGEMENT_ORDER,PLUGIN_CONFIGURATION,PLUGIN_ELEMENT</enforcers>
                 </compound>
                 <requireJavaVersion>
-                  <version>[11,12)</version>
+                  <version>[17,18)</version>
                 </requireJavaVersion>
                 <requireMavenVersion>
                   <version>[3.9,3.10)</version>
