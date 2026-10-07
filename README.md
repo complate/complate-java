@@ -32,7 +32,7 @@ or
 </dependency>
 ```
 
-If you want to use the latest unstable version `1.0.1-SNAPSHOT` you need to
+If you want to use the latest unstable version `1.1.0` you need to
 configure Sonatype's OSS Nexus as snapshot repository:
 
 ```xml
